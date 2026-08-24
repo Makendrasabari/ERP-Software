@@ -89,6 +89,57 @@ html {
   overflow-x: hidden;
 }
 
+/* ==========================================================================
+   GLOBAL PAGE PRELOADER (Rotating Stackly Logo Visual)
+   ========================================================================== */
+#global-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--navy-950, #0a0f1d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999999;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, visibility;
+}
+
+#global-preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(1.04);
+}
+
+.preloader-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.preloader-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  animation: preloaderSpin 1.4s linear infinite;
+  will-change: transform;
+}
+
+@keyframes preloaderSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 body {
   font-family: var(--font-body);
   font-size: 15px;

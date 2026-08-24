@@ -116,6 +116,12 @@
   </style>
 </head>
 <body>
+  <!-- GLOBAL STACKLY LOGO PRELOADER -->
+  <div id="global-preloader" aria-hidden="true">
+    <div class="preloader-logo-wrap">
+      <img src="assets/stackly_066.webp" alt="Loading Stackly ERP" class="preloader-logo" />
+    </div>
+  </div>
 
   <!-- Background Ambient Glow & Rotating Radar -->
   <div class="error-404-glow" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
@@ -153,7 +159,7 @@
         <span class="material-symbols-outlined">home</span>
         <span>Back to Home</span>
       </a>
-      <button type="button" class="btn btn-go-back btn-lg" onclick="window.history.back()">
+      <button type="button" class="btn btn-go-back btn-lg" onclick="handleGoBack()">
         <span class="material-symbols-outlined">arrow_back</span>
         <span>Go Back</span>
       </button>

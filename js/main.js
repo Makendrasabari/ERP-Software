@@ -3,6 +3,64 @@
  * Handles navigation, toast notifications, scroll animations, counters, and global UX
  */
 
+/* ==========================================================================
+   GLOBAL PAGE PRELOADER CONTROLLER (1.5s Minimum Rotating Logo Display)
+   ========================================================================== */
+(function initGlobalPreloader() {
+  let startTime = Date.now();
+  const MIN_DISPLAY_TIME = 1500; // Minimum 1.5 seconds
+
+  function hidePreloader() {
+    const preloader = document.getElementById('global-preloader');
+    if (!preloader) return;
+
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = Math.max(0, MIN_DISPLAY_TIME - elapsedTime);
+
+    setTimeout(() => {
+      preloader.classList.add('fade-out');
+      setTimeout(() => {
+        if (preloader) {
+          preloader.style.display = 'none';
+        }
+      }, 520);
+    }, remainingTime);
+  }
+
+  // Initial window load
+  if (document.readyState === 'complete') {
+    hidePreloader();
+  } else {
+    window.addEventListener('load', hidePreloader);
+  }
+
+  // Handle Back-Forward Cache (bfcache) navigation (e.g. Go Back button / browser back)
+  window.addEventListener('pageshow', (event) => {
+    const preloader = document.getElementById('global-preloader');
+    if (!preloader) return;
+
+    if (event.persisted) {
+      startTime = Date.now();
+      preloader.style.display = 'flex';
+      preloader.classList.remove('fade-out');
+    }
+    hidePreloader();
+  });
+})();
+
+/**
+ * Universal Safe Go-Back Navigation Handler
+ */
+function handleGoBack() {
+  if (window.history.length > 1 && document.referrer) {
+    window.history.back();
+  } else {
+    window.location.href = 'index.html';
+  }
+}
+window.handleGoBack = handleGoBack;
+
+
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initMobileDrawer();
@@ -672,6 +730,14 @@ function initRoiCalculator() {
   employeeSlider.addEventListener('input', calculateROI);
   revenueSlider.addEventListener('input', calculateROI);
   calculateROI();
+
+  const auditBtn = document.getElementById('btn-roi-audit') || document.querySelector('.roi-output-btn');
+  if (auditBtn) {
+    auditBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '404.html';
+    });
+  }
 }
 
 /* ==========================================================================
