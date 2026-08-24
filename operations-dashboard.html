@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operations Command Center | Stackly ERP</title>
+  <meta name="description" content="Operational execution, supply chain optimization, purchase orders, plant throughput, and fleet logistics dashboard." />
+  
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body" id="ops-dashboard-root">
+
+  <div class="dashboard-wrapper">
+    <!-- COLLAPSIBLE SIDEBAR -->
+    <aside class="sidebar" aria-label="Operations Navigation">
+      <div class="sidebar-header">
+        <a href="operations-dashboard.html" class="sidebar-logo">
+          <img src="assets/stackly_066.webp" alt="Stackly ERP" />
+        </a>
+        <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close Navigation">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-section-title">Operations Command</div>
+        
+        <!-- Module 1: Operations Overview -->
+        <a href="#ops-overview" class="sidebar-nav-item active" data-module="module-ops-overview">
+          <span class="material-symbols-outlined">precision_manufacturing</span>
+          <span class="sidebar-link-text">Operations Overview</span>
+          <span class="sidebar-badge" style="background: var(--success); color: white;">94.2%</span>
+        </a>
+
+        <!-- Module 2: Sales & Orders -->
+        <a href="#sales-orders" class="sidebar-nav-item" data-module="module-sales-orders">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          <span class="sidebar-link-text">Sales & Orders</span>
+          <span class="sidebar-badge">1.2k</span>
+        </a>
+
+        <!-- Module 3: Procurement -->
+        <a href="#procurement" class="sidebar-nav-item" data-module="module-procurement">
+          <span class="material-symbols-outlined">shopping_bag</span>
+          <span class="sidebar-link-text">Procurement</span>
+          <span class="sidebar-badge" style="background: var(--warning); color: white;">1 Pending</span>
+        </a>
+
+        <!-- Module 4: Inventory & Supply Chain -->
+        <a href="#supply-chain" class="sidebar-nav-item" data-module="module-supply-chain">
+          <span class="material-symbols-outlined">local_shipping</span>
+          <span class="sidebar-link-text">Supply Chain & Fleet</span>
+        </a>
+
+        <!-- Module 5: Reports & Performance -->
+        <a href="#ops-reports" class="sidebar-nav-item" data-module="module-ops-reports">
+          <span class="material-symbols-outlined">monitoring</span>
+          <span class="sidebar-link-text">Reports & Performance</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="login.html" class="sidebar-signout-btn" title="Sign Out of Session">
+          <span class="material-symbols-outlined">logout</span>
+          <span class="sidebar-link-text">Sign Out</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEWPORT CONTENT -->
+    <div class="main-content-wrapper">
+      <!-- TOPBAR NAVIGATION -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="topbar-btn" id="mobile-sidebar-toggle" aria-label="Open Navigation Menu">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="topbar-active-title" id="topbar-page-title">
+            <span class="material-symbols-outlined" id="topbar-page-icon" style="color: var(--primary); font-size: 22px;">precision_manufacturing</span>
+            <span id="topbar-page-heading">Operations Overview</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Notification Button (Assigned to 404 Page) -->
+          <a href="404.html" class="topbar-btn" id="topbar-notif-btn" title="Operations Alerts">
+            <span class="material-symbols-outlined">notifications</span>
+            <span class="topbar-badge-dot"></span>
+          </a>
+
+          <!-- User Profile Menu -->
+          <div style="position: relative;">
+            <button class="topbar-btn" id="topbar-user-btn" style="width: auto; padding: 4px 10px; gap: 8px; border: none; background: var(--slate-100);">
+              <div id="topbar-user-avatar-initials" class="user-avatar-initials">ER</div>
+              <span id="topbar-user-name" style="font-size: 13px; font-weight: 600; color: var(--slate-800);">Elena Rostova</span>
+              <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+            </button>
+            <div class="dropdown-menu-popover" id="user-popover" style="width: 270px;">
+              <div style="padding: 16px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                  <div id="popover-user-avatar-initials" class="user-avatar-initials" style="width: 38px; height: 38px; font-size: 14px;">ER</div>
+                  <div style="overflow: hidden;">
+                    <div id="user-popover-name" style="font-weight: 700; font-size: 13.5px; color: var(--slate-900); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">Elena Rostova</div>
+                    <div id="user-popover-email" style="font-size: 11.5px; color: var(--slate-500); word-break: break-all;">ops.lead@stackly-erp.internal</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--slate-200);">
+                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--slate-400);">Assigned Role:</span>
+                  <span id="user-popover-role" class="badge badge-success" style="font-size: 11px; padding: 2px 8px;">Operations Manager</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- DYNAMIC OPERATIONS MODULES -->
+      <main class="dashboard-content">
+
+        <!-- ===================================================================
+             MODULE 1: OPERATIONS OVERVIEW
+             =================================================================== -->
+        <section id="module-ops-overview" class="module-view active">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Plant & Fulfillment Operations Command</h2>
+              <div class="page-subtitle">Real-time throughput telemetry, OEE efficiency, and active work orders.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="date-selector-pill">
+                <span class="material-symbols-outlined">schedule</span>
+                <span>Shift 2 (In Progress)</span>
+              </a>
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action" data-format="Operations Daily Log">
+                <span class="material-symbols-outlined">download</span>
+                <span>Export Daily Log</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Operations KPI Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Overall Equipment Effectiveness (OEE)</span>
+                <div class="kpi-icon-badge" style="background: var(--success-bg); color: var(--success);"><span class="material-symbols-outlined">speed</span></div>
+              </div>
+              <div class="kpi-value">94.2%</div>
+              <div class="kpi-footer">
+                <span class="kpi-trend up"><span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span> +2.8%</span>
+                <span>Above plant SLA (90%)</span>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Active Work Orders</span>
+                <div class="kpi-icon-badge" style="background: var(--info-bg); color: var(--info);"><span class="material-symbols-outlined">assignment</span></div>
+              </div>
+              <div class="kpi-value">342 Jobs</div>
+              <div class="kpi-footer">
+                <span class="badge badge-info">280 in schedule</span>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">On-Time Delivery (OTD)</span>
+                <div class="kpi-icon-badge" style="background: var(--primary-light); color: var(--primary);"><span class="material-symbols-outlined">done_all</span></div>
+              </div>
+              <div class="kpi-value">98.6%</div>
+              <div class="kpi-footer">
+                <span class="kpi-trend up"><span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span> Top Tier</span>
+                <span>Global carrier rating</span>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Supply Chain Bottlenecks</span>
+                <div class="kpi-icon-badge" style="background: var(--warning-bg); color: var(--warning);"><span class="material-symbols-outlined">alt_route</span></div>
+              </div>
+              <div class="kpi-value">2 Diverted</div>
+              <div class="kpi-footer">
+                <span class="badge badge-warning">Auto-rerouted</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row: Hourly Output & Facility Index -->
+          <div class="dashboard-grid-2">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <div class="chart-title">Hourly Plant Processing Output</div>
+                  <div class="chart-subtitle">Actual units processed vs hourly target quota</div>
+                </div>
+              </div>
+              <div class="chart-body">
+                <canvas id="opsOutputChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <div class="chart-title">Facility OEE Index</div>
+                  <div class="chart-subtitle">Efficiency across assembly lines & QA</div>
+                </div>
+              </div>
+              <div class="chart-body">
+                <canvas id="opsFacilityChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: ACTIVE PLANT ASSEMBLY LINES & IOT EDGE TELEMETRY -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">precision_manufacturing</span> Active Plant Assembly Lines & IoT Edge Telemetry</h4>
+                <span class="badge badge-success"><span class="material-symbols-outlined">sensors</span> 3 Lines Synchronized</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong style="font-size: 13.5px;">Line 1: High-Speed Electronics</strong>
+                    <span class="badge badge-success">99.2% Speed</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin-bottom: 6px;">Throughput: 840 units/hr • Zero Faults</div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 99.2%; background: var(--success);"></div></div>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong style="font-size: 13.5px;">Line 2: Mechanical Assembly</strong>
+                    <span class="badge badge-primary">96.4% Speed</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin-bottom: 6px;">Throughput: 520 units/hr • Calibrated</div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 96.4%; background: var(--primary);"></div></div>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong style="font-size: 13.5px;">Line 3: Packaging & Palletizing</strong>
+                    <span class="badge badge-success">98.8% Speed</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin-bottom: 6px;">Throughput: 1,120 units/hr • Auto-Wrapped</div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 98.8%; background: var(--success);"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: OPERATIONAL SAFETY & ENVIRONMENTAL SENSOR GRID -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">shield</span> Operational Plant Safety & Environmental Sensors</h4>
+                <span class="badge badge-success">ISO 45001 Platinum Grade</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; color: var(--slate-900);">Zero Incident Record</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Lost Time Injuries (LTI)</div>
+                  </div>
+                  <span class="badge badge-success" style="font-size: 13px; font-weight: 700;">480 Days Safe</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; color: var(--slate-900);">Ambient Air & Cleanroom</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">ISO Class 7 Cleanroom</div>
+                  </div>
+                  <span class="badge badge-success">0.01 PPM • Optimal</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; color: var(--slate-900);">Thermal & Vibration Grid</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Motor Bearing Health</div>
+                  </div>
+                  <span class="badge badge-success">Normal (42°C / 0.04G)</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; color: var(--slate-900);">Emergency Protocol Status</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Automated Dispatch Ready</div>
+                  </div>
+                  <span class="badge badge-success">Standby Normal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             MODULE 2: SALES & ORDERS
+             =================================================================== -->
+        <section id="module-sales-orders" class="module-view">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Sales Orders & Fulfillment Telemetry</h2>
+              <div class="page-subtitle">Real-time order processing pipeline, priority dispatching, and carrier manifests.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action" data-format="Orders Manifest CSV">
+                <span class="material-symbols-outlined">download</span> Export Order Manifest
+              </a>
+            </div>
+          </div>
+
+          <div class="dashboard-grid-equal">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Weekly Order Velocity</div><div class="chart-subtitle">Order volume in thousands ($k)</div></div>
+              </div>
+              <div class="chart-body"><canvas id="salesVelocityChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Order Fulfillment Status</div><div class="chart-subtitle">Active distribution breakdown</div></div>
+              </div>
+              <div class="chart-body"><canvas id="orderStatusChart"></canvas></div>
+            </div>
+          </div>
+
+          <!-- Active Orders Table -->
+          <div class="table-card">
+            <div class="table-header-bar">
+              <div>
+                <h4>Live Order Dispatch Pipeline</h4>
+                <div style="font-size: 12px; color: var(--slate-500);">Real-time dispatching stream</div>
+              </div>
+              <input type="text" class="table-search-input input-field" placeholder="Filter orders..." style="width: 220px; font-size: 12px; padding: 6px 12px; background: var(--slate-50); border-color: var(--slate-300); color: var(--slate-800);" />
+            </div>
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Enterprise Client</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Total Value</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>ORD-84192</strong></td>
+                    <td>Amazon Robotics Hub</td>
+                    <td>2026-08-21</td>
+                    <td>24 Units</td>
+                    <td style="font-weight: 700; color: var(--slate-900);">$94,200.00</td>
+                    <td><span class="badge badge-warning">High</span></td>
+                    <td><span class="badge badge-primary"><span class="material-symbols-outlined">local_shipping</span> Dispatched</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>ORD-84191</strong></td>
+                    <td>Siemens Energy Ltd</td>
+                    <td>2026-08-21</td>
+                    <td>12 Units</td>
+                    <td style="font-weight: 700; color: var(--slate-900);">$48,000.00</td>
+                    <td><span class="badge badge-danger">Urgent</span></td>
+                    <td><span class="badge badge-warning"><span class="material-symbols-outlined">pending</span> Processing</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>ORD-84190</strong></td>
+                    <td>Boeing Supplier Div</td>
+                    <td>2026-08-20</td>
+                    <td>150 Packs</td>
+                    <td style="font-weight: 700; color: var(--slate-900);">$182,500.00</td>
+                    <td><span class="badge badge-warning">High</span></td>
+                    <td><span class="badge badge-info"><span class="material-symbols-outlined">flight_takeoff</span> In-Transit</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>ORD-84189</strong></td>
+                    <td>Tesla Gigafactory 4</td>
+                    <td>2026-08-20</td>
+                    <td>80 Units</td>
+                    <td style="font-weight: 700; color: var(--slate-900);">$310,000.00</td>
+                    <td><span class="badge badge-neutral">Normal</span></td>
+                    <td><span class="badge badge-success"><span class="material-symbols-outlined">check_circle</span> Delivered</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: GLOBAL CARRIER TRANSIT PERFORMANCE & LOGISTICS SLA -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">local_shipping</span> Global Carrier Transit Performance & SLA Reliability</h4>
+                <span class="badge badge-success">Average Fleet SLA: 98.6%</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">FedEx Custom Critical</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">142 Active Expedited Shipments</div>
+                  </div>
+                  <span class="badge badge-success">99.4% On-Time</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">DHL Express Worldwide</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">86 Cross-Border Air Cargo</div>
+                  </div>
+                  <span class="badge badge-success">98.8% On-Time</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Maersk Ocean Freight</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">18 Maritime TEU Containers</div>
+                  </div>
+                  <span class="badge badge-success">97.2% On-Time</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Enterprise Direct Fleet</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">34 Regional Delivery Convoys</div>
+                  </div>
+                  <span class="badge badge-success">99.8% On-Time</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: PRIORITY TIER-1 ENTERPRISE ACCOUNTS & MILESTONES -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">military_tech</span> Strategic Tier-1 Enterprise Accounts & Delivery Milestones</h4>
+                <span class="badge badge-primary">4 Master Contracts</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">Tesla Gigafactory Texas</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 4px 0;">Milestone: Automated Drive Assembly (Phase 3)</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                    <span class="badge badge-success">Signoff Complete</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--slate-900);">$310,000</span>
+                  </div>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">Boeing Commercial Airplanes</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 4px 0;">Milestone: Titanium Hydraulic Harnesses (Batch 12)</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                    <span class="badge badge-info">In Final QA Gate</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--slate-900);">$182,500</span>
+                  </div>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">Amazon Robotics Fulfillment</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 4px 0;">Milestone: Sortation Actuator Pods (Cycle 8)</div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                    <span class="badge badge-primary">Dispatched</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--slate-900);">$94,200</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             MODULE 3: PROCUREMENT
+             =================================================================== -->
+        <section id="module-procurement" class="module-view">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Procurement & Supplier Governance</h2>
+              <div class="page-subtitle">Purchase order approval workflows, vendor ratings, and contract spending.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action" data-format="Procurement Spend Sheet">
+                <span class="material-symbols-outlined">download</span> Download Spend Analysis
+              </a>
+            </div>
+          </div>
+
+          <div class="dashboard-grid-equal">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Procurement Spend by Material Category</div><div class="chart-subtitle">Monthly spend allocation (USD Millions)</div></div>
+              </div>
+              <div class="chart-body"><canvas id="procurementSpendChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Vendor Quality & Reliability Index</div><div class="chart-subtitle">Compliance score based on SLA delivery</div></div>
+              </div>
+              <div class="chart-body"><canvas id="vendorScoreChart"></canvas></div>
+            </div>
+          </div>
+
+          <!-- Purchase Orders Table with Interactive Approve/Reject Buttons -->
+          <div class="table-card">
+            <div class="table-header-bar">
+              <div>
+                <h4>Purchase Order Approval Queue</h4>
+                <div style="font-size: 12px; color: var(--slate-500);">Interactive authorization chain</div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>PO Number</th>
+                    <th>Authorized Vendor</th>
+                    <th>Items / Scope</th>
+                    <th>Total Amount</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong class="po-id">PO-2026-881</strong></td>
+                    <td>AeroTech Industrial</td>
+                    <td>Precision Bearings x500</td>
+                    <td style="font-weight: 700; color: var(--slate-900);">$42,500.00</td>
+                    <td>2026-08-21</td>
+                    <td><span class="badge badge-warning badge-status"><span class="material-symbols-outlined">pending</span> Pending Approval</span></td>
+                    <td>
+                      <a href="404.html" class="btn btn-primary btn-sm btn-po-approve" style="padding: 4px 10px; font-size: 11px; text-decoration: none;">
+                        <span class="material-symbols-outlined" style="font-size: 14px;">check</span> Authorize
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong class="po-id">PO-2026-880</strong></td>
+                    <td>Global Raw Metals Corp</td>
+                    <td>Alloy Sheets 4mm (10 Ton)</td>
+                    <td style="font-weight: 700; color: var(--slate-900);">$118,200.00</td>
+                    <td>2026-08-20</td>
+                    <td><span class="badge badge-success badge-status"><span class="material-symbols-outlined">check_circle</span> Approved</span></td>
+                    <td><span class="badge badge-neutral">Processed</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong class="po-id">PO-2026-879</strong></td>
+                    <td>MicroSemi Microchips</td>
+                    <td>ARM Cortex Controllers x2k</td>
+                    <td style="font-weight: 700; color: var(--slate-900);">$64,000.00</td>
+                    <td>2026-08-19</td>
+                    <td><span class="badge badge-info badge-status"><span class="material-symbols-outlined">local_shipping</span> In Transit</span></td>
+                    <td><span class="badge badge-neutral">Processed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: STRATEGIC TIER-1 SUPPLIER SCORECARD & QUALITY MATRIX -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">verified</span> Strategic Supplier Quality Scorecard & Compliance</h4>
+                <span class="badge badge-success">Zero Defect Certification</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">AeroTech Industrial</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Quality: 99.4% • Defect Rate: 0.002%</div>
+                  </div>
+                  <span class="badge badge-success">Score: 98.4 / 100</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Global Raw Metals Corp</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Quality: 98.8% • ESG Audited</div>
+                  </div>
+                  <span class="badge badge-success">Score: 96.2 / 100</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">MicroSemi Microchips</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Quality: 99.9% • ISO 9001 Certified</div>
+                  </div>
+                  <span class="badge badge-success">Score: 99.1 / 100</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">BASF Chemical Resins</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Quality: 99.1% • REACH Compliant</div>
+                  </div>
+                  <span class="badge badge-success">Score: 97.5 / 100</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: BULK MATERIAL SPEND ANALYTICS & COST OPTIMIZATION -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">savings</span> Bulk Procurement Cost Optimization & Contract Savings</h4>
+                <span class="badge badge-success">$480,000 Saved YTD</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">Titanium Fasteners Master Agreement</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 4px 0;">Volume discount applied across 4 plants (14.2% price rebate).</div>
+                  <span class="badge badge-success">$140,000 Annual Savings</span>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">Silicon Controller Multi-Year Lock</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 4px 0;">Fixed forward pricing hedged against semiconductor index.</div>
+                  <span class="badge badge-success">$210,000 Annual Savings</span>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">High-Purity Lubricants & Fluid Packs</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 4px 0;">Consolidated vendor contract with quarterly volume rebate.</div>
+                  <span class="badge badge-success">$130,000 Annual Savings</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             MODULE 4: INVENTORY & SUPPLY CHAIN
+             =================================================================== -->
+        <section id="module-supply-chain" class="module-view">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Supply Chain Telemetry & Logistics</h2>
+              <div class="page-subtitle">Multimodal freight tracking, vendor lead-time variance, and warehouse bay turnover.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action" data-format="Freight Logistics Manifest">
+                <span class="material-symbols-outlined">download</span> Export Fleet Report
+              </a>
+            </div>
+          </div>
+
+          <div class="dashboard-grid-equal">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Supplier Lead Time vs SLA Benchmark</div><div class="chart-subtitle">Days elapsed from PO to warehouse receipt</div></div>
+              </div>
+              <div class="chart-body"><canvas id="supplyLeadTimeChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Warehouse Bay Throughput Efficiency</div><div class="chart-subtitle">Receiving, staging, and outbound loading index</div></div>
+              </div>
+              <div class="chart-body"><canvas id="warehouseBayChart"></canvas></div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div class="card">
+              <div class="badge badge-success" style="margin-bottom: 8px;">Fleet Route 01 (North Corridor)</div>
+              <h4>Truck Convoy NY-04</h4>
+              <p style="font-size: 13px; color: var(--slate-500); margin: 6px 0;">Carrying 240 units to Hub Central. On schedule (ETA: 4h 12m).</p>
+              <div class="status-dot" style="margin-top: 8px;"></div>
+            </div>
+
+            <div class="card">
+              <div class="badge badge-info" style="margin-bottom: 8px;">Maritime Freight (Atlantic Express)</div>
+              <h4>Container Vessel MS-Starlight</h4>
+              <p style="font-size: 13px; color: var(--slate-500); margin: 6px 0;">Customs pre-cleared at Port of Rotterdam. On schedule.</p>
+              <div class="status-dot" style="background: var(--info); margin-top: 8px;"></div>
+            </div>
+
+            <div class="card">
+              <div class="badge badge-warning" style="margin-bottom: 8px;">Air Cargo Express (Frankfurt - ORD)</div>
+              <h4>Lufthansa Cargo LH8210</h4>
+              <p style="font-size: 13px; color: var(--slate-500); margin: 6px 0;">High-priority microchips in final approach.</p>
+              <div class="status-dot" style="background: var(--warning); margin-top: 8px;"></div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: GLOBAL MULTIMODAL ROUTE OPTIMIZATION & PORT CONGESTION -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">hub</span> Multimodal Freight Corridors & Port Congestion Monitor</h4>
+                <span class="badge badge-success">Automated Rerouting Active</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Port of Rotterdam</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Average Vessel Turn: 4.2 hrs</div>
+                  </div>
+                  <span class="badge badge-success">Clear • Normal Flow</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Port of Singapore</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Average Vessel Turn: 5.8 hrs</div>
+                  </div>
+                  <span class="badge badge-success">Clear • High Speed</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Port of Newark (NY/NJ)</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Berth Dwell: 14.1 hrs</div>
+                  </div>
+                  <span class="badge badge-warning">Moderate Congestion</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Hamburg Air Logistics Hub</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Turnaround: 1.8 hrs</div>
+                  </div>
+                  <span class="badge badge-success">Optimal • Priority</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: COLD-CHAIN & SENSITIVE CARGO ENVIRONMENTAL MONITORING -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">device_thermostat</span> Cold-Chain & High-Value Cargo IoT Sensor Telemetry</h4>
+                <span class="badge badge-primary">100% Sensor Compliance</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">Shipment SH-9912 (Biopolymer Resin)</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 6px 0;">Temp: <strong>-18.4°C</strong> (Target: -20°C to -15°C) • Humidity: 42%</div>
+                  <span class="badge badge-success">Within Spec Range</span>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">Shipment SH-9914 (Optic Waveguides)</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 6px 0;">Vibration Peak: <strong>0.02G</strong> (Threshold: &lt; 0.5G) • Shock: 0</div>
+                  <span class="badge badge-success">Zero Shock Event</span>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">Shipment SH-9918 (Precision Actuators)</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 6px 0;">Temp: <strong>21.2°C</strong> (Ambient) • Nitrogen Purged Seals: 100%</div>
+                  <span class="badge badge-success">Seals Intact</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             MODULE 5: REPORTS & PERFORMANCE
+             =================================================================== -->
+        <section id="module-ops-reports" class="module-view">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Operations Performance & SLA Analytics</h2>
+              <div class="page-subtitle">Shift productivity benchmarking, quality compliance, and automated operational exports.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action" data-format="Operations Executive Briefing">
+                <span class="material-symbols-outlined">file_present</span> Generate Full Audit Pack
+              </a>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div class="card">
+              <h4>Shift 1 Productivity Matrix</h4>
+              <p style="font-size: 13px; color: var(--slate-500); margin: 6px 0 0 0;">Throughput analysis and machine utilization logs.</p>
+            </div>
+
+            <div class="card">
+              <h4>Vendor SLA Compliance Audit</h4>
+              <p style="font-size: 13px; color: var(--slate-500); margin: 6px 0 0 0;">Historical lead time variance across 64 active vendors.</p>
+            </div>
+
+            <div class="card">
+              <h4>Quality Control Gateway Yields</h4>
+              <p style="font-size: 13px; color: var(--slate-500); margin: 6px 0 0 0;">First-pass yield percentages across assembly lines.</p>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: OVERALL EQUIPMENT EFFECTIVENESS (OEE) TRI-FACTOR DEEP-DIVE -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">speed</span> Overall Equipment Effectiveness (OEE) Tri-Factor Decomposition</h4>
+                <span class="badge badge-success">Overall OEE: 94.2% (World-Class &gt; 85%)</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                    <span>Availability Rate</span>
+                    <span>97.4%</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 97.4%; background: var(--success);"></div></div>
+                  <div style="font-size: 11.5px; color: var(--slate-500);">Planned Uptime: 23.4 / 24 hrs</div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                    <span>Performance Efficiency</span>
+                    <span>96.1%</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 96.1%; background: var(--primary);"></div></div>
+                  <div style="font-size: 11.5px; color: var(--slate-500);">Operating at 96.1% rated nameplate speed</div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                    <span>First-Pass Quality Yield</span>
+                    <span>99.4%</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 99.4%; background: var(--info);"></div></div>
+                  <div style="font-size: 11.5px; color: var(--slate-500);">Rejection / Scrap Rate: 0.6%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: SHIFT WORKFORCE PRODUCTIVITY & ENERGY SUSTAINABILITY -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">energy_savings_leaf</span> Shift Energy Sustainability & Carbon Footprint Metrics</h4>
+                <span class="badge badge-success">ISO 50001 Energy Compliant</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Shift 1 (Morning Core)</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">4.2 kWh / Unit Produced</div>
+                  </div>
+                  <span class="badge badge-success">Efficiency: 96%</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Shift 2 (Afternoon Peak)</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">4.5 kWh / Unit Produced</div>
+                  </div>
+                  <span class="badge badge-success">Efficiency: 94%</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Shift 3 (Night Automated)</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">3.8 kWh / Unit Produced</div>
+                  </div>
+                  <span class="badge badge-success">Efficiency: 98%</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Renewable Solar Offset</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Salem HQ Rooftop Grid</div>
+                  </div>
+                  <span class="badge badge-success">42.8% Clean Solar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

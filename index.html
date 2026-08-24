@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly ERP | Next-Generation Intelligent Enterprise Platform</title>
+  <meta name="description" content="Empower your global enterprise with Stackly ERP: an intelligent, unified cloud platform for Finance, Human Resources, Supply Chain, Inventory, and Business Intelligence." />
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/main.css" />
+  <!-- Chart.js for Interactive Live BI Preview -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Site Header & Sticky Navbar -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo" id="nav-brand-logo">
+        <img src="assets/stackly_066.webp" alt="Stackly ERP Enterprise Logo" />
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="nav-menu" id="primary-nav-menu">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-primary" id="navbar-login-btn">
+          <span class="material-symbols-outlined">lock_open</span> Login
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle Mobile Menu" id="mobile-menu-toggle">
+          <span class="material-symbols-outlined" style="font-size: 26px;">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <img src="assets/stackly_066.webp" alt="Stackly ERP" style="height: 44px;" />
+      <button class="mobile-drawer-close" style="background: none; border: none; cursor: pointer; color: var(--slate-600);">
+        <span class="material-symbols-outlined" style="font-size: 24px;">close</span>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="mobile-drawer-footer">
+      <a href="login.html" class="btn btn-primary" style="width: 100%;">
+        <span class="material-symbols-outlined">lock_open</span> Login
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <main>
+    <!-- FULL-WIDTH HERO SECTION WITH 5-IMAGE BACKGROUND CONTINUOUS SLIDER (2.0s Interval) -->
+    <section class="hero-fullscreen-section">
+      <!-- Background 5-Image Continuous Slider Track -->
+      <div class="hero-bg-slider-track">
+        <div class="hero-bg-slide active" style="background-image: url('assets/hero_slide_1.webp');"></div>
+        <div class="hero-bg-slide" style="background-image: url('assets/hero_slide_2.webp');"></div>
+        <div class="hero-bg-slide" style="background-image: url('assets/hero_slide_3.webp');"></div>
+        <div class="hero-bg-slide" style="background-image: url('assets/hero_slide_4.webp');"></div>
+        <div class="hero-bg-slide" style="background-image: url('assets/hero_slide_5.webp');"></div>
+      </div>
+
+      <!-- High-Contrast Enterprise Dark Gradient Overlay -->
+      <div class="hero-bg-overlay"></div>
+
+      <!-- Centered Hero Content -->
+      <div class="container" style="position: relative; z-index: 3;">
+        <div class="hero-content-centered">
+          <div class="section-tag hero-anim-badge" style="background: rgba(255, 92, 1, 0.2); border-color: rgba(255, 92, 1, 0.45); color: #ff7a2e; margin-bottom: 20px;">
+            <span class="material-symbols-outlined">verified</span> Enterprise-Grade ERP Suite
+          </div>
+
+          <h1>
+            <span class="hero-heading-left">Unified Operations, Real-Time Ledgers,</span>
+            <span class="hero-heading-right" style="color: var(--primary);">Intelligent Growth.</span>
+          </h1>
+
+          <p class="section-subtitle hero-anim-desc">
+            Stackly ERP harmonizes global supply chains, multi-entity finances, workforce operations, and predictive analytics into one seamless, high-performance platform.
+          </p>
+
+          <!-- CTAs -->
+          <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 44px;">
+            <a href="404.html" class="btn btn-primary btn-lg hero-cta-left" id="hero-primary-cta">
+              <span>Request Enterprise Demo</span>
+            </a>
+            <a href="404.html" class="btn btn-outline-white btn-lg hero-cta-right" id="hero-secondary-cta">
+              <span class="material-symbols-outlined">dashboard_customize</span>
+              <span>Explore Modules</span>
+            </a>
+          </div>
+
+          <!-- Trust & Compliance Badges -->
+          <div class="hero-anim-trust" style="display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; border-top: 1px solid rgba(255, 255, 255, 0.12); padding-top: 28px; max-width: 680px; margin: 0 auto;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined" style="color: var(--primary); font-size: 20px;">shield</span>
+              <span style="font-size: 13px; color: var(--slate-300); font-weight: 500;">SOC-2 Type II Certified</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined" style="color: var(--info); font-size: 20px;">lock</span>
+              <span style="font-size: 13px; color: var(--slate-300); font-weight: 500;">ISO 27001 Bank-Grade</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined" style="color: var(--success); font-size: 20px;">verified</span>
+              <span style="font-size: 13px; color: var(--success); font-weight: 700;">99.99% Uptime SLA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slider Indicator Dots -->
+      <div class="hero-bg-slider-dots">
+        <span class="hero-bg-dot active" data-slide-index="0" title="Slide 1: Global Corporate Architecture"></span>
+        <span class="hero-bg-dot" data-slide-index="1" title="Slide 2: Smart Warehouses & Fulfillment"></span>
+        <span class="hero-bg-dot" data-slide-index="2" title="Slide 3: Financial Ledgers & Analytics"></span>
+        <span class="hero-bg-dot" data-slide-index="3" title="Slide 4: Multimodal Supply Chains"></span>
+        <span class="hero-bg-dot" data-slide-index="4" title="Slide 5: Human Capital & Operations"></span>
+      </div>
+    </section>
+
+    <!-- STATISTICS FLOATING SECTION (70px Vertical Gap from Hero) -->
+    <section class="hero-stats-wrapper">
+      <div class="container">
+        <div class="hero-stats-floating-card">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 32px; text-align: center;">
+            <div class="reveal-init">
+              <div class="counter-value" style="color: var(--primary);" data-target="12500" data-suffix="+">12,500+</div>
+              <div style="font-size: 14px; color: var(--slate-400); margin-top: 8px; font-weight: 500;">Enterprises Scaled</div>
+            </div>
+            <div class="reveal-init">
+              <div class="counter-value" style="color: var(--white);" data-target="4800" data-prefix="$" data-suffix="M+">$4.8B+</div>
+              <div style="font-size: 14px; color: var(--slate-400); margin-top: 8px; font-weight: 500;">Annual Ledger Volume</div>
+            </div>
+            <div class="reveal-init">
+              <div class="counter-value" style="color: var(--success);" data-target="450" data-suffix="k+">450k+</div>
+              <div style="font-size: 14px; color: var(--slate-400); margin-top: 8px; font-weight: 500;">Workforce Managed</div>
+            </div>
+            <div class="reveal-init">
+              <div class="counter-value" style="color: var(--primary);" data-target="99" data-suffix=".99%">99.99%</div>
+              <div style="font-size: 14px; color: var(--slate-400); margin-top: 8px; font-weight: 500;">Operational Reliability</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE ERP FEATURES & CAPABILITIES -->
+    <section class="section-padding" style="background-color: var(--slate-50); padding-top: 35px;">
+      <div class="container">
+        <div class="section-header reveal-init">
+          <div class="section-tag"><span class="material-symbols-outlined">hub</span> Integrated Capabilities</div>
+          <h2 class="section-title">Engineered for Complex Modern Enterprises</h2>
+          <p class="section-subtitle">Break down operational silos with an all-in-one architecture designed for high throughput, strict compliance, and instant executive visibility.</p>
+        </div>
+
+        <div class="modules-grid-3d" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 28px;">
+          <!-- HRM -->
+          <div class="card module-card-3d">
+            <div class="icon-box"><span class="material-symbols-outlined">badge</span></div>
+            <h4>Human Resource Management</h4>
+            <p style="font-size: 14px; color: var(--slate-600); margin: 10px 0 16px 0;">Automate multi-entity payroll, dynamic shift scheduling, talent lifecycle, and real-time biometric attendance sync.</p>
+            <ul class="feature-list">
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Automated Tax & Payroll Compliance</li>
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Department Performance Benchmarks</li>
+            </ul>
+            <a href="404.html" class="btn btn-outline btn-sm" style="width: 100%;">Module Specifications</a>
+          </div>
+
+          <!-- Inventory -->
+          <div class="card module-card-3d">
+            <div class="icon-box"><span class="material-symbols-outlined">inventory_2</span></div>
+            <h4>Inventory & Warehouse Ops</h4>
+            <p style="font-size: 14px; color: var(--slate-600); margin: 10px 0 16px 0;">Track millions of SKUs across multi-regional hubs with batch serial tracking, barcode telemetry, and automated reorders.</p>
+            <ul class="feature-list">
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Multi-Warehouse Bay Utilization</li>
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Dynamic Low-Stock Thresholds</li>
+            </ul>
+            <a href="404.html" class="btn btn-outline btn-sm" style="width: 100%;">Module Specifications</a>
+          </div>
+
+          <!-- Finance -->
+          <div class="card module-card-3d">
+            <div class="icon-box"><span class="material-symbols-outlined">account_balance</span></div>
+            <h4>Finance & General Ledger</h4>
+            <p style="font-size: 14px; color: var(--slate-600); margin: 10px 0 16px 0;">Continuous double-entry ledger auditing, automated bank reconciliations, multi-currency conversion, and cashflow modeling.</p>
+            <ul class="feature-list">
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Automated Month-End Closing</li>
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> IFRS & GAAP Dual Reporting</li>
+            </ul>
+            <a href="404.html" class="btn btn-outline btn-sm" style="width: 100%;">Module Specifications</a>
+          </div>
+
+          <!-- Sales & CRM -->
+          <div class="card module-card-3d">
+            <div class="icon-box"><span class="material-symbols-outlined">query_stats</span></div>
+            <h4>Sales Pipeline & CRM</h4>
+            <p style="font-size: 14px; color: var(--slate-600); margin: 10px 0 16px 0;">Seamless lead-to-cash pipeline with quotes, recurring contracts, commission routing, and instant order dispatch.</p>
+            <ul class="feature-list">
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Customer 360 Account Visibility</li>
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Real-Time Fulfillment Tracking</li>
+            </ul>
+            <a href="404.html" class="btn btn-outline btn-sm" style="width: 100%;">Module Specifications</a>
+          </div>
+
+          <!-- Procurement -->
+          <div class="card module-card-3d">
+            <div class="icon-box"><span class="material-symbols-outlined">shopping_cart_checkout</span></div>
+            <h4>Procurement & Vendor EDI</h4>
+            <p style="font-size: 14px; color: var(--slate-600); margin: 10px 0 16px 0;">Streamline purchase requisitions, automated vendor scorecards, multi-tier approval workflows, and contract SLAs.</p>
+            <ul class="feature-list">
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Purchase Order Approval Chains</li>
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Vendor Lead-Time Benchmarking</li>
+            </ul>
+            <a href="404.html" class="btn btn-outline btn-sm" style="width: 100%;">Module Specifications</a>
+          </div>
+
+          <!-- Operations -->
+          <div class="card module-card-3d">
+            <div class="icon-box"><span class="material-symbols-outlined">precision_manufacturing</span></div>
+            <h4>Operations & Manufacturing</h4>
+            <p style="font-size: 14px; color: var(--slate-600); margin: 10px 0 16px 0;">Control plant output, bill of materials (BOM), work center routings, quality assurance stages, and equipment telemetry.</p>
+            <ul class="feature-list">
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Overall Equipment Effectiveness (OEE)</li>
+              <li class="feature-list-item"><span class="material-symbols-outlined">check_circle</span> Batch Quality Control Gateways</li>
+            </ul>
+            <a href="404.html" class="btn btn-outline btn-sm" style="width: 100%;">Module Specifications</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUSINESS INTELLIGENCE & ANALYTICS PREVIEW -->
+    <section class="section-padding content-visual-section">
+      <div class="container">
+        <div class="content-visual-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+          <div class="anim-content-col">
+            <div class="section-tag anim-tag"><span class="material-symbols-outlined">analytics</span> Real-Time Analytics</div>
+            <h2 class="section-title anim-heading">Decision Intelligence Driven by Live Operational Telemetry</h2>
+            <p class="anim-desc" style="color: var(--slate-600); margin-bottom: 24px;">
+              Traditional ERP systems provide static month-end snapshots. Stackly ERP delivers real-time event-streamed dashboards, anomaly detection, and predictive cashflow models.
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px;">
+              <div class="anim-feature-item" style="display: flex; gap: 14px; align-items: flex-start;">
+                <div class="icon-box" style="width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-bottom: 0;">
+                  <span class="material-symbols-outlined">monitoring</span>
+                </div>
+                <div>
+                  <h5 style="margin-bottom: 4px;">Predictive Revenue & Expense Forecasting</h5>
+                  <p style="font-size: 13.5px; color: var(--slate-500);">Utilize neural historical regressions to foresee cash constraints 90 days in advance.</p>
+                </div>
+              </div>
+
+              <div class="anim-feature-item" style="display: flex; gap: 14px; align-items: flex-start;">
+                <div class="icon-box" style="width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--success-bg); color: var(--success); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-bottom: 0;">
+                  <span class="material-symbols-outlined">speed</span>
+                </div>
+                <div>
+                  <h5 style="margin-bottom: 4px;">Sub-Second KPI Aggregation</h5>
+                  <p style="font-size: 13.5px; color: var(--slate-500);">Instant multi-entity consolidated reporting without waiting for offline batch batch jobs.</p>
+                </div>
+              </div>
+            </div>
+
+            <a href="404.html" class="btn btn-secondary anim-cta">
+              <span class="material-symbols-outlined">login</span> Launch Interactive Dashboards
+            </a>
+          </div>
+
+          <!-- Interactive Chart Preview Box -->
+          <div class="chart-card anim-visual-col" style="box-shadow: var(--shadow-lg);">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-title">Executive Revenue vs Target</div>
+                <div class="chart-subtitle">Consolidated Global Performance (USD Millions)</div>
+              </div>
+              <span class="badge badge-success"><span class="material-symbols-outlined">trending_up</span> +18.4% YoY</span>
+            </div>
+            <div class="chart-body" style="height: 290px;">
+              <canvas id="homeBiPreviewChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE ROI CALCULATOR SECTION -->
+    <section class="section-padding" style="background-color: var(--slate-50); border-top: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200);">
+      <div class="container">
+        <div class="section-header reveal-init">
+          <div class="section-tag"><span class="material-symbols-outlined">calculate</span> Value Engineering</div>
+          <h2 class="section-title">Calculate Your Enterprise ROI & Efficiency Dividend</h2>
+          <p class="section-subtitle">Simulate real-time operating cost reductions, automated audit hours, and payback timeline based on your organization's footprint.</p>
+        </div>
+
+        <div class="roi-calculator-box reveal-init">
+          <div>
+            <div class="roi-slider-group">
+              <div class="roi-slider-header">
+                <span class="roi-slider-label">Workforce & Platform Users</span>
+                <span class="roi-slider-value" id="roi-emp-val">250 Users</span>
+              </div>
+              <input type="range" id="roi-employees" min="20" max="2500" value="250" step="10" class="roi-range-input" />
+              <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-400); margin-top: 6px;">
+                <span>20 Users (Mid-Market)</span>
+                <span>2,500+ Users (Global Enterprise)</span>
+              </div>
+            </div>
+
+            <div class="roi-slider-group" style="margin-bottom: 32px;">
+              <div class="roi-slider-header">
+                <span class="roi-slider-label">Annual Gross Transaction Volume ($ USD)</span>
+                <span class="roi-slider-value" id="roi-rev-val">$50M</span>
+              </div>
+              <input type="range" id="roi-revenue" min="5" max="500" value="50" step="5" class="roi-range-input" />
+              <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--slate-400); margin-top: 6px;">
+                <span>$5M / Year</span>
+                <span>$500M+ / Year</span>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--slate-600);">
+                <span class="material-symbols-outlined" style="color: var(--success); font-size: 18px;">check_circle</span>
+                <span>Includes Automated Ledger Reconciliations</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--slate-600);">
+                <span class="material-symbols-outlined" style="color: var(--success); font-size: 18px;">check_circle</span>
+                <span>Zero Legacy Middleware Licensing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="roi-output-panel">
+            <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--slate-300);">Projected Annual Value Created</div>
+            <div class="roi-big-metric" id="roi-savings-result">$1.66M</div>
+            <div style="font-size: 13.5px; color: #cbd5e1;">Direct labor, software consolidation & inventory optimization</div>
+
+            <div class="roi-metric-grid">
+              <div class="roi-submetric-box">
+                <div class="roi-submetric-num" id="roi-hours-result">35,500 hrs/yr</div>
+                <div style="font-size: 12px; color: var(--slate-400); margin-top: 4px;">Manual Admin Eliminated</div>
+              </div>
+              <div class="roi-submetric-box">
+                <div class="roi-submetric-num" id="roi-payback-result">2.8 Months</div>
+                <div style="font-size: 12px; color: var(--slate-400); margin-top: 4px;">Est. Payback Horizon</div>
+              </div>
+            </div>
+
+            <a href="contact.html" class="btn btn-primary roi-output-btn">
+              <span>Request Detailed Value Audit</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNECTED WORKFLOW PIPELINE -->
+    <section class="section-padding horizontal-cards-section" style="background-color: var(--navy-950); color: var(--white);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag" style="background: rgba(255, 92, 1, 0.15); border-color: rgba(255, 92, 1, 0.3);">
+            <span class="material-symbols-outlined">account_tree</span> Connected Architecture
+          </div>
+          <h2 class="section-title row-heading-left" style="color: var(--white);">End-to-End Cross-Departmental Pipeline</h2>
+          <p class="section-subtitle row-subtitle-right" style="color: var(--slate-400);">Every transaction automatically updates inventory, recalculates cost of goods, posts ledger entries, and notifies management.</p>
+        </div>
+
+        <div class="horizontal-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 16px;">
+          <div class="shuffle-card" style="background-color: var(--navy-900); border: 1px solid var(--navy-800); border-radius: var(--radius-lg); padding: 24px; text-align: center;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <span class="material-symbols-outlined">point_of_sale</span>
+            </div>
+            <h5 style="color: var(--white); margin-bottom: 8px;">1. Sales Order</h5>
+            <p style="font-size: 13px; color: var(--slate-400);">Customer PO captured and validated against credit limits.</p>
+          </div>
+
+          <div class="shuffle-card" style="background-color: var(--navy-900); border: 1px solid var(--navy-800); border-radius: var(--radius-lg); padding: 24px; text-align: center;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--info-bg); color: var(--info); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <span class="material-symbols-outlined">warehouse</span>
+            </div>
+            <h5 style="color: var(--white); margin-bottom: 8px;">2. Stock Allocation</h5>
+            <p style="font-size: 13px; color: var(--slate-400);">Automated bay reservation and fulfillment routing.</p>
+          </div>
+
+          <div class="shuffle-card" style="background-color: var(--navy-900); border: 1px solid var(--navy-800); border-radius: var(--radius-lg); padding: 24px; text-align: center;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--warning-bg); color: var(--warning); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <span class="material-symbols-outlined">local_shipping</span>
+            </div>
+            <h5 style="color: var(--white); margin-bottom: 8px;">3. Dispatch & Fleet</h5>
+            <p style="font-size: 13px; color: var(--slate-400);">Carrier EDI manifest generated with live GPS telemetry.</p>
+          </div>
+
+          <div class="shuffle-card" style="background-color: var(--navy-900); border: 1px solid var(--navy-800); border-radius: var(--radius-lg); padding: 24px; text-align: center;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--success-bg); color: var(--success); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <span class="material-symbols-outlined">receipt_long</span>
+            </div>
+            <h5 style="color: var(--white); margin-bottom: 8px;">4. Ledger Settlement</h5>
+            <p style="font-size: 13px; color: var(--slate-400);">Instant invoice generation and journal entry posting.</p>
+          </div>
+
+          <div class="shuffle-card" style="background-color: var(--navy-900); border: 1px solid var(--navy-800); border-radius: var(--radius-lg); padding: 24px; text-align: center;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <span class="material-symbols-outlined">insights</span>
+            </div>
+            <h5 style="color: var(--white); margin-bottom: 8px;">5. Executive KPI</h5>
+            <p style="font-size: 13px; color: var(--slate-400);">Real-time profitability margin reflected on executive board.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS & CASE STUDIES (LIVE HORIZONTAL RUNNING MARQUEE) -->
+    <section class="section-padding horizontal-cards-section testimonials-slider-section" style="background-color: var(--white); overflow: hidden;">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag"><span class="material-symbols-outlined">stars</span> Enterprise Proof</div>
+          <h2 class="section-title row-heading-left">Trusted by Global Operations Leaders</h2>
+          <p class="section-subtitle row-subtitle-right">Discover how multinational enterprises operate with precision using Stackly ERP.</p>
+        </div>
+      </div>
+
+      <!-- Continuous Horizontal Marquee Slider -->
+      <div class="testimonials-slider-container">
+        <div class="testimonials-track">
+          
+          <!-- Card 1: Sarah Lin -->
+          <div class="testimonial-card">
+            <div style="display: flex; gap: 2px; color: var(--warning); margin-bottom: 14px;">
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+            </div>
+            <p style="font-size: 14.5px; color: var(--slate-700); font-style: italic; line-height: 1.6; margin-bottom: 20px;">
+              "Stackly ERP enabled us to consolidate 8 regional logistics facilities into one unified operating system. Our warehouse turnaround time plummeted by 38% in 90 days."
+            </p>
+            <div style="display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--slate-100); padding-top: 16px; margin-top: auto;">
+              <img src="assets/testimonial_sarah.jpg" alt="Sarah Lin - VP Supply Chain" class="testimonial-avatar" />
+              <div>
+                <div style="font-weight: 700; color: var(--slate-900); font-size: 14.5px;">Sarah Lin</div>
+                <div style="font-size: 12.5px; color: var(--slate-500);">VP Supply Chain, Apex Global</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: David Sterling -->
+          <div class="testimonial-card">
+            <div style="display: flex; gap: 2px; color: var(--warning); margin-bottom: 14px;">
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+            </div>
+            <p style="font-size: 14.5px; color: var(--slate-700); font-style: italic; line-height: 1.6; margin-bottom: 20px;">
+              "The continuous financial auditing module cut our global month-end closing from 14 business days down to 4 hours. The automated tax compliance alone saved millions."
+            </p>
+            <div style="display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--slate-100); padding-top: 16px; margin-top: auto;">
+              <img src="assets/testimonial_david.jpg" alt="David Sterling - Chief Financial Officer" class="testimonial-avatar" />
+              <div>
+                <div style="font-weight: 700; color: var(--slate-900); font-size: 14.5px;">David Sterling</div>
+                <div style="font-size: 12.5px; color: var(--slate-500);">Chief Financial Officer, Vertex Corp</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Marcus Zhao -->
+          <div class="testimonial-card">
+            <div style="display: flex; gap: 2px; color: var(--warning); margin-bottom: 14px;">
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+            </div>
+            <p style="font-size: 14.5px; color: var(--slate-700); font-style: italic; line-height: 1.6; margin-bottom: 20px;">
+              "Having role-tailored dashboards for both executive leadership and plant floor managers provides immediate operational clarity without information overload."
+            </p>
+            <div style="display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--slate-100); padding-top: 16px; margin-top: auto;">
+              <img src="assets/testimonial_marcus.jpg" alt="Marcus Zhao - Director of Operations" class="testimonial-avatar" />
+              <div>
+                <div style="font-weight: 700; color: var(--slate-900); font-size: 14.5px;">Marcus Zhao</div>
+                <div style="font-size: 12.5px; color: var(--slate-500);">Director of Operations, Helios Energy</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CLONES FOR SEAMLESS CONTINUOUS LOOP -->
+          <!-- Card 1 Clone: Sarah Lin -->
+          <div class="testimonial-card" aria-hidden="true">
+            <div style="display: flex; gap: 2px; color: var(--warning); margin-bottom: 14px;">
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+            </div>
+            <p style="font-size: 14.5px; color: var(--slate-700); font-style: italic; line-height: 1.6; margin-bottom: 20px;">
+              "Stackly ERP enabled us to consolidate 8 regional logistics facilities into one unified operating system. Our warehouse turnaround time plummeted by 38% in 90 days."
+            </p>
+            <div style="display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--slate-100); padding-top: 16px; margin-top: auto;">
+              <img src="assets/testimonial_sarah.jpg" alt="Sarah Lin - VP Supply Chain" class="testimonial-avatar" />
+              <div>
+                <div style="font-weight: 700; color: var(--slate-900); font-size: 14.5px;">Sarah Lin</div>
+                <div style="font-size: 12.5px; color: var(--slate-500);">VP Supply Chain, Apex Global</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 Clone: David Sterling -->
+          <div class="testimonial-card" aria-hidden="true">
+            <div style="display: flex; gap: 2px; color: var(--warning); margin-bottom: 14px;">
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+            </div>
+            <p style="font-size: 14.5px; color: var(--slate-700); font-style: italic; line-height: 1.6; margin-bottom: 20px;">
+              "The continuous financial auditing module cut our global month-end closing from 14 business days down to 4 hours. The automated tax compliance alone saved millions."
+            </p>
+            <div style="display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--slate-100); padding-top: 16px; margin-top: auto;">
+              <img src="assets/testimonial_david.jpg" alt="David Sterling - Chief Financial Officer" class="testimonial-avatar" />
+              <div>
+                <div style="font-weight: 700; color: var(--slate-900); font-size: 14.5px;">David Sterling</div>
+                <div style="font-size: 12.5px; color: var(--slate-500);">Chief Financial Officer, Vertex Corp</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 Clone: Marcus Zhao -->
+          <div class="testimonial-card" aria-hidden="true">
+            <div style="display: flex; gap: 2px; color: var(--warning); margin-bottom: 14px;">
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+            </div>
+            <p style="font-size: 14.5px; color: var(--slate-700); font-style: italic; line-height: 1.6; margin-bottom: 20px;">
+              "Having role-tailored dashboards for both executive leadership and plant floor managers provides immediate operational clarity without information overload."
+            </p>
+            <div style="display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--slate-100); padding-top: 16px; margin-top: auto;">
+              <img src="assets/testimonial_marcus.jpg" alt="Marcus Zhao - Director of Operations" class="testimonial-avatar" />
+              <div>
+                <div style="font-weight: 700; color: var(--slate-900); font-size: 14.5px;">Marcus Zhao</div>
+                <div style="font-size: 12.5px; color: var(--slate-500);">Director of Operations, Helios Energy</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECURITY & COMPLIANCE MATRIX SECTION -->
+    <section class="section-padding horizontal-cards-section" style="background-color: var(--navy-950); color: var(--white); border-top: 1px solid var(--navy-800);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag" style="background: rgba(255, 92, 1, 0.15); border-color: rgba(255, 92, 1, 0.3);">
+            <span class="material-symbols-outlined">shield_lock</span> Sovereign Trust
+          </div>
+          <h2 class="section-title row-heading-left" style="color: var(--white);">Bank-Grade Security & Continuous Compliance</h2>
+          <p class="section-subtitle row-subtitle-right" style="color: var(--slate-400);">Designed from the ground up for strict regulatory defense, customer-controlled key management, and zero data leakage.</p>
+        </div>
+
+        <div class="horizontal-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 28px;">
+          <div class="security-card shuffle-card">
+            <div class="security-card-icon"><span class="material-symbols-outlined">key</span></div>
+            <h4 style="margin-bottom: 8px; color: var(--white); font-weight: 700;">Hardware Security Modules</h4>
+            <p style="font-size: 13.5px; color: var(--slate-300); line-height: 1.6; margin-bottom: 16px;">
+              FIPS 140-3 Level 4 hardware encryption with Bring-Your-Own-Key (BYOK) architecture ensuring only your authorized officers can decrypt financial records.
+            </p>
+            <span class="badge badge-success"><span class="material-symbols-outlined">verified</span> AES-256-GCM BYOK</span>
+          </div>
+
+          <div class="security-card shuffle-card">
+            <div class="security-card-icon" style="color: var(--info); background: var(--info-bg);"><span class="material-symbols-outlined">fact_check</span></div>
+            <h4 style="margin-bottom: 8px; color: var(--white); font-weight: 700;">Continuous Audit Trails</h4>
+            <p style="font-size: 13.5px; color: var(--slate-300); line-height: 1.6; margin-bottom: 16px;">
+              Cryptographically hashed append-only logs capture every user touch, approval escalation, and data export for effortless SOC-2 & ISO audits.
+            </p>
+            <span class="badge badge-info"><span class="material-symbols-outlined">verified</span> Immutable Log Fabric</span>
+          </div>
+
+          <div class="security-card shuffle-card">
+            <div class="security-card-icon" style="color: var(--warning); background: var(--warning-bg);"><span class="material-symbols-outlined">policy</span></div>
+            <h4 style="margin-bottom: 8px; color: var(--white); font-weight: 700;">Global Data Sovereignty</h4>
+            <p style="font-size: 13.5px; color: var(--slate-300); line-height: 1.6; margin-bottom: 16px;">
+              Strict tenant boundary isolation guarantees that European, North American, and Asia-Pacific data residency laws (GDPR, CCPA, APPI) are enforced.
+            </p>
+            <span class="badge badge-warning"><span class="material-symbols-outlined">verified</span> Regional Multi-Zone</span>
+          </div>
+
+          <div class="security-card shuffle-card">
+            <div class="security-card-icon" style="color: var(--success); background: var(--success-bg);"><span class="material-symbols-outlined">restart_alt</span></div>
+            <h4 style="margin-bottom: 8px; color: var(--white); font-weight: 700;">&lt; 15-Second Disaster Failover</h4>
+            <p style="font-size: 13.5px; color: var(--slate-300); line-height: 1.6; margin-bottom: 16px;">
+              Active-active cross-continental database clusters with zero-data-loss synchronous replication guaranteeing 99.99% contractual uptime.
+            </p>
+            <span class="badge badge-success"><span class="material-symbols-outlined">verified</span> 99.99% Uptime SLA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRE-FOOTER CALL TO ACTION -->
+    <section class="prefooter-cta-section" style="background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-950) 100%); color: var(--white); padding: 80px 0; border-top: 1px solid var(--navy-800); position: relative;">
+      <div class="container" style="text-align: center; max-width: 780px;">
+        <div class="section-tag prefooter-badge" style="background: rgba(255, 92, 1, 0.15); border-color: rgba(255, 92, 1, 0.3);">
+          <span class="material-symbols-outlined">rocket_launch</span> Immediate Deployment
+        </div>
+        <h2 class="prefooter-heading" style="color: var(--white); margin-bottom: 18px;">Ready to Transform Your Enterprise Operations?</h2>
+        <p class="prefooter-desc" style="color: var(--slate-300); font-size: 1.15rem; margin-bottom: 36px;">
+          Experience how Stackly ERP centralizes mission-critical operations with unmatched speed, security, and intelligence.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+          <a href="404.html" class="btn btn-primary btn-lg prefooter-btn-left">
+            <span>Explore Role Dashboards</span>
+          </a>
+          <a href="404.html" class="btn btn-outline-white btn-lg prefooter-btn-right">
+            <span class="material-symbols-outlined">support_agent</span>
+            <span>Contact Solution Architect</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="display: inline-block; margin-bottom: 8px;">
+            <img src="assets/stackly_066.webp" alt="Stackly ERP" style="height: 48px;" />
+          </a>
+          <p>
+            Stackly ERP is the trusted operating system for global enterprises. Integrating HRM, Finance, Supply Chain, and BI into one cohesive cloud architecture.
+          </p>
+        </div>
+
+        <!-- Col 2: Quick Links (Navbar Pages) -->
+        <div>
+          <div class="footer-heading">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="index.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Home</a></li>
+            <li><a href="about.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> About</a></li>
+            <li><a href="services.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Services</a></li>
+            <li><a href="blog.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Blog</a></li>
+            <li><a href="contact.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Contact</a></li>
+            <li><a href="login.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Platform Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Company (Routes to 404) -->
+        <div>
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> About Platform</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Enterprise Insights</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Global Locations</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Security & Roles</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Careers & Culture</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Partner Network</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Stackly Salem Address & Global Contact -->
+        <div>
+          <div class="footer-heading">Salem Hub & Global Desk</div>
+          <ul class="footer-address-list">
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">location_on</span>
+              <div>
+                <strong>Stackly ERP Towers</strong><br />
+                IT Expressway, Salem,<br />
+                Tamil Nadu 636005, India
+              </div>
+            </li>
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">phone_in_talk</span>
+              <div>
+                <span>+91 (427) 849-2910</span><br />
+                <span style="font-size: 12px; color: var(--slate-400);">Toll-Free: +1 (800) 849-2910</span>
+              </div>
+            </li>
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">mail</span>
+              <div>
+                <a href="mailto:salem.hub@stackly-erp.internal" style="color: var(--primary);">salem.hub@stackly-erp.internal</a>
+              </div>
+            </li>
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">schedule</span>
+              <div>
+                <span style="font-size: 12.5px; color: var(--slate-400);">Mon – Sat: 09:00 – 19:00 IST</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly Enterprise ERP Systems Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+          <a href="404.html" style="color: var(--slate-500); font-size: 13px;">Security Whitepaper</a>
+          <a href="404.html" style="color: var(--slate-500); font-size: 13px;">SOC-2 Compliance</a>
+          <a href="404.html" style="color: var(--slate-500); font-size: 13px;">Privacy Governance</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Live Home Page BI Preview Chart
+    document.addEventListener('DOMContentLoaded', () => {
+      const ctx = document.getElementById('homeBiPreviewChart');
+      if (ctx && typeof Chart !== 'undefined') {
+        new Chart(ctx.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26', 'Q2 26'],
+            datasets: [
+              {
+                label: 'Actual Revenue ($M)',
+                data: [3.4, 4.1, 4.8, 5.6, 6.4, 7.2],
+                borderColor: '#ff5c01',
+                backgroundColor: 'rgba(255, 92, 1, 0.1)',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 3
+              },
+              {
+                label: 'Operating Expense ($M)',
+                data: [2.1, 2.3, 2.5, 2.7, 2.9, 3.1],
+                borderColor: '#6366f1',
+                borderDash: [4, 4],
+                borderWidth: 2,
+                fill: false,
+                tension: 0.4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'top', align: 'end' } },
+            scales: {
+              y: { ticks: { callback: v => '$' + v + 'M' }, grid: { color: 'rgba(226, 232, 240, 0.6)' } },
+              x: { grid: { display: false } }
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

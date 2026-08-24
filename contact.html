@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Solutions Architects | Stackly ERP Platform</title>
+  <meta name="description" content="Get in touch with Stackly ERP enterprise architects for custom platform demos, security whitepapers, and SLA consultations." />
+  
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!-- Site Header & Sticky Navbar -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo" id="nav-brand-logo">
+        <img src="assets/stackly_066.webp" alt="Stackly ERP Enterprise Logo" />
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-primary">
+          <span class="material-symbols-outlined">lock_open</span> Login
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle Mobile Menu">
+          <span class="material-symbols-outlined" style="font-size: 26px;">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <img src="assets/stackly_066.webp" alt="Stackly ERP" style="height: 44px;" />
+      <button class="mobile-drawer-close" style="background: none; border: none; cursor: pointer; color: var(--slate-600);">
+        <span class="material-symbols-outlined" style="font-size: 24px;">close</span>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="contact.html" class="nav-link active">Contact</a></li>
+    </ul>
+    <div class="mobile-drawer-footer">
+      <a href="login.html" class="btn btn-primary" style="width: 100%;">
+        <span class="material-symbols-outlined">lock_open</span> Login
+      </a>
+    </div>
+  </aside>
+
+  <main>
+    <!-- PAGE HERO WITH HD BACKGROUND IMAGE -->
+    <section class="page-hero-banner" style="background-image: url('assets/bg_contact.webp');">
+      <div class="container">
+        <div class="hero-banner-content">
+          <div class="section-tag hero-anim-badge" style="background: rgba(255, 92, 1, 0.2); border-color: rgba(255, 92, 1, 0.45); color: #ff7a2e; margin-bottom: 16px;">
+            <span class="material-symbols-outlined">headset_mic</span> Enterprise Advisory
+          </div>
+          <h1>
+            <span class="hero-heading-left">Connect with an</span>
+            <span class="hero-heading-right" style="color: var(--primary);">ERP Solution Architect</span>
+          </h1>
+          <p class="section-subtitle hero-anim-desc">
+            Discuss your enterprise data architecture, migration timeline, and deployment specifications with a certified technical consultant.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM & GLOBAL HUBS -->
+    <section class="section-padding contact-consultation-section">
+      <div class="container">
+        <div class="contact-consultation-grid">
+          
+          <!-- ENTERPRISE INQUIRY FORM (Comes from DOWN / Bottom) -->
+          <div class="card contact-box-from-bottom" style="box-shadow: var(--shadow-lg);">
+            <div style="margin-bottom: 24px;">
+              <h3 class="anim-heading">Request Technical Consultation</h3>
+              <p class="anim-desc" style="font-size: 13.5px; color: var(--slate-500); margin-top: 4px;">All enterprise requests are reviewed under bilateral NDA standards.</p>
+            </div>
+
+            <form id="enterprise-contact-form" action="404.html" method="GET" novalidate>
+              <div class="form-row-2col">
+                <div>
+                  <label for="full-name" style="display: block; font-size: 13px; font-weight: 600; color: var(--slate-700); margin-bottom: 6px;">Full Name *</label>
+                  <input type="text" id="full-name" class="input-field" placeholder="e.g. Katherine Hayes" style="background: var(--slate-50); border-color: var(--slate-300); color: var(--slate-900);" required />
+                  <div id="full-name-error" style="display: none; font-size: 12px; color: var(--danger); margin-top: 4px;">Full name is mandatory.</div>
+                </div>
+
+                <div>
+                  <label for="work-email" style="display: block; font-size: 13px; font-weight: 600; color: var(--slate-700); margin-bottom: 6px;">Work Email *</label>
+                  <input type="email" id="work-email" class="input-field" placeholder="khayes@enterprise.com" style="background: var(--slate-50); border-color: var(--slate-300); color: var(--slate-900);" required />
+                  <div id="work-email-error" style="display: none; font-size: 12px; color: var(--danger); margin-top: 4px;">Valid corporate email is mandatory.</div>
+                </div>
+              </div>
+
+              <div class="form-row-2col">
+                <div>
+                  <label for="phone-number" style="display: block; font-size: 13px; font-weight: 600; color: var(--slate-700); margin-bottom: 6px;">Direct Phone</label>
+                  <input type="tel" id="phone-number" class="input-field" placeholder="+1 (555) 019-2834" style="background: var(--slate-50); border-color: var(--slate-300); color: var(--slate-900);" />
+                </div>
+
+                <div>
+                  <label for="company-name" style="display: block; font-size: 13px; font-weight: 600; color: var(--slate-700); margin-bottom: 6px;">Company / Entity *</label>
+                  <input type="text" id="company-name" class="input-field" placeholder="e.g. Apex Global Corp" style="background: var(--slate-50); border-color: var(--slate-300); color: var(--slate-900);" required />
+                  <div id="company-name-error" style="display: none; font-size: 12px; color: var(--danger); margin-top: 4px;">Company name is mandatory.</div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                <label for="inquiry-subject" style="display: block; font-size: 13px; font-weight: 600; color: var(--slate-700); margin-bottom: 6px;">Consultation Focus Area</label>
+                <input type="text" id="inquiry-subject" class="input-field" placeholder="e.g. Multi-Warehouse Supply Chain & General Ledger Migration" style="background: var(--slate-50); border-color: var(--slate-300); color: var(--slate-900);" />
+              </div>
+
+              <div style="margin-bottom: 24px;">
+                <label for="message-body" style="display: block; font-size: 13px; font-weight: 600; color: var(--slate-700); margin-bottom: 6px;">Operational Scope & Requirements *</label>
+                <textarea id="message-body" rows="4" class="input-field" placeholder="Describe current ERP bottlenecks, employee headcount, regional entities, or timeline..." style="background: var(--slate-50); border-color: var(--slate-300); color: var(--slate-900); resize: vertical;" required></textarea>
+                <div id="message-body-error" style="display: none; font-size: 12px; color: var(--danger); margin-top: 4px;">Please provide brief project requirements.</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                <span>Transmit Enterprise Request</span>
+                <span class="material-symbols-outlined">send</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- CONTACT INFO & DIRECT LINES -->
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            
+            <!-- Top Box: Global Headquarters (Comes from LEFT) -->
+            <div class="card contact-box-from-left">
+              <div class="icon-box"><span class="material-symbols-outlined">apartment</span></div>
+              <h4>Global Headquarters</h4>
+              <p style="font-size: 14px; color: var(--slate-600); margin: 8px 0 16px 0;">
+                Stackly ERP Tower<br />
+                350 5th Avenue, Suite 6200<br />
+                New York, NY 10118, United States
+              </p>
+              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13.5px;">
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--slate-700);">
+                  <span class="material-symbols-outlined" style="color: var(--primary); font-size: 18px;">call</span>
+                  <span>+1 (800) 849-2910</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--slate-700);">
+                  <span class="material-symbols-outlined" style="color: var(--primary); font-size: 18px;">mail</span>
+                  <span>enterprise@stackly-erp.internal</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; color: var(--slate-700);">
+                  <span class="material-symbols-outlined" style="color: var(--primary); font-size: 18px;">schedule</span>
+                  <span>Mon – Fri: 08:00 – 20:00 EST</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Box: Global Support SLA (Comes from RIGHT) -->
+            <div class="card card-dark contact-box-from-right">
+              <div class="badge badge-success" style="margin-bottom: 12px;"><span class="material-symbols-outlined">shield</span> 24/7 Enterprise Tier 1 SLA</div>
+              <h4 style="color: var(--white); margin-bottom: 8px;">Dedicated Mission-Critical Support</h4>
+              <p style="font-size: 13.5px; color: var(--slate-400); margin-bottom: 16px;">
+                Existing enterprise customers with critical severity incidents receive sub-15 minute response times via designated technical account managers.
+              </p>
+              <div style="font-size: 13px; color: var(--slate-300);">
+                Priority Desk: <strong style="color: var(--white);">support-hotline@stackly-erp.internal</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- STACKLY SALEM GLOBAL HEADQUARTERS MAP SECTION -->
+    <section class="section-padding" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-header reveal-init" style="margin-bottom: 32px;">
+          <div class="section-tag"><span class="material-symbols-outlined">location_on</span> Main Campus & Engineering Hub</div>
+          <h2 class="section-title">Stackly Salem Headquarters</h2>
+          <p class="section-subtitle">Visit our global technical headquarters and primary platform development facility in Salem, Tamil Nadu, India.</p>
+        </div>
+
+        <div class="map-section-wrapper reveal-init">
+          <!-- Entire Map Area Navigates to Google Maps in Chrome/New Tab -->
+          <a 
+            href="https://www.google.com/maps/search/?api=1&query=Salem+Tamil+Nadu+India" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="map-click-target" 
+            title="Click to open Stackly Salem Headquarters in Google Maps"
+            aria-label="Click to open Stackly Salem Headquarters in Google Maps">
+            
+            <iframe 
+              class="map-iframe"
+              src="https://maps.google.com/maps?q=Salem%2C%20Tamil%20Nadu%2C%20India&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              title="Stackly ERP Salem Headquarters Map"
+              loading="lazy">
+            </iframe>
+
+            <div class="map-open-hint-pill">
+              <span class="material-symbols-outlined" style="font-size: 18px;">open_in_new</span>
+              <span>Click Map to Open in Google Maps</span>
+            </div>
+          </a>
+
+          <!-- Floating Salem Details Card -->
+          <div class="map-floating-card">
+            <div class="badge badge-primary" style="margin-bottom: 12px; background: rgba(255, 92, 1, 0.2); border: 1px solid rgba(255, 92, 1, 0.45); color: #ff7a2e;">
+              <span class="material-symbols-outlined" style="font-size: 14px;">domain</span> Global Headquarters
+            </div>
+            <h3 style="color: var(--white); font-size: 1.25rem; margin-bottom: 8px;">Stackly ERP Towers</h3>
+            <p style="font-size: 13px; color: var(--slate-300); line-height: 1.5; margin-bottom: 16px;">
+              IT Expressway, Salem, Tamil Nadu 636005, India
+            </p>
+            
+            <div style="font-size: 12.5px; color: var(--slate-300); display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="material-symbols-outlined" style="color: var(--primary); font-size: 16px;">phone</span>
+                <span>+91 (427) 849-2910</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="material-symbols-outlined" style="color: var(--primary); font-size: 16px;">mail</span>
+                <a href="mailto:salem.hub@stackly-erp.internal" style="color: var(--primary);">salem.hub@stackly-erp.internal</a>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="material-symbols-outlined" style="color: var(--success); font-size: 16px;">schedule</span>
+                <span>Mon – Sat: 09:00 – 19:00 IST</span>
+              </div>
+            </div>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=Salem+Tamil+Nadu+India" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;">
+              <span class="material-symbols-outlined">directions</span>
+              <span>Get Campus Directions</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE REGIONAL OPERATIONAL HUBS TABS -->
+    <section class="section-padding" style="background-color: var(--slate-50); border-top: 1px solid var(--slate-200);">
+      <div class="container tab-container">
+        <div class="section-header reveal-init">
+          <div class="section-tag"><span class="material-symbols-outlined">map</span> Global Network</div>
+          <h2 class="section-title">Regional Operational Facilities</h2>
+          <p class="section-subtitle">Select a regional center for localized direct contact and regulatory compliance details.</p>
+        </div>
+
+        <!-- Location Tab Buttons -->
+        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; flex-wrap: wrap;">
+          <button class="btn btn-primary filter-pill active" data-tab-target="loc-salem">Salem Global HQ</button>
+          <button class="btn btn-outline filter-pill" data-tab-target="loc-ny">New York HQ</button>
+          <button class="btn btn-outline filter-pill" data-tab-target="loc-london">London Hub</button>
+          <button class="btn btn-outline filter-pill" data-tab-target="loc-singapore">Singapore APAC</button>
+          <button class="btn btn-outline filter-pill" data-tab-target="loc-frankfurt">Frankfurt Cloud</button>
+        </div>
+
+        <!-- Tab Contents -->
+        <!-- Tab 1: Salem Global HQ -->
+        <div id="loc-salem" class="tab-pane active card salem-hq-card reveal-init" style="max-width: 820px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div class="salem-hq-content">
+            <h3 class="salem-hq-title" style="margin-bottom: 8px;">Salem Global HQ Campus</h3>
+            <p class="salem-hq-desc" style="font-size: 14px; color: var(--slate-600); margin: 8px 0 16px 0;">Primary worldwide research & development campus, central ERP cloud architecture hub, and engineering governance center.</p>
+            <div class="salem-hq-contact-list" style="font-size: 13.5px; color: var(--slate-700); line-height: 1.8; display: flex; flex-direction: column; gap: 4px;">
+              <div class="salem-hq-contact-item"><strong>Direct:</strong> +91 (427) 849-2910</div>
+              <div class="salem-hq-contact-item"><strong>Timezone:</strong> IST (UTC+5:30)</div>
+              <div class="salem-hq-contact-item"><strong>Address:</strong> Stackly ERP Towers, IT Expressway, Salem, TN 636005</div>
+            </div>
+          </div>
+          <div class="location-img-box salem-hq-img-box">
+            <img 
+              src="assets/salem_hq_campus.webp" 
+              alt="Stackly Salem Global HQ Campus" 
+              class="location-campus-img salem-hq-campus-img" 
+            />
+          </div>
+        </div>
+
+        <!-- Tab 2: New York HQ -->
+        <div id="loc-ny" class="tab-pane card salem-hq-card" style="max-width: 820px; margin: 0 auto; display: none; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div class="salem-hq-content">
+            <h3 class="salem-hq-title" style="margin-bottom: 8px;">New York Executive Center</h3>
+            <p class="salem-hq-desc" style="font-size: 14px; color: var(--slate-600); margin: 8px 0 16px 0;">Primary Americas operations, solution architecture lab, and enterprise engineering core.</p>
+            <div class="salem-hq-contact-list" style="font-size: 13.5px; color: var(--slate-700); line-height: 1.8; display: flex; flex-direction: column; gap: 4px;">
+              <div class="salem-hq-contact-item"><strong>Direct:</strong> +1 (800) 849-2910</div>
+              <div class="salem-hq-contact-item"><strong>Timezone:</strong> Eastern Time (UTC-5)</div>
+              <div class="salem-hq-contact-item"><strong>Compliance:</strong> SOC-2 Type II, HIPAA, FedRAMP Ready</div>
+            </div>
+          </div>
+          <div class="location-img-box salem-hq-img-box">
+            <img 
+              src="assets/location_ny.jpg" 
+              alt="Stackly New York Executive Center Tower" 
+              class="location-campus-img salem-hq-campus-img" 
+            />
+          </div>
+        </div>
+
+        <!-- Tab 3: London Hub -->
+        <div id="loc-london" class="tab-pane card salem-hq-card" style="max-width: 820px; margin: 0 auto; display: none; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div class="salem-hq-content">
+            <h3 class="salem-hq-title" style="margin-bottom: 8px;">London EMEA Headquarters</h3>
+            <p class="salem-hq-desc" style="font-size: 14px; color: var(--slate-600); margin: 8px 0 16px 0;">Coordinating multi-currency operations and cross-border supply chains throughout Europe and Middle East.</p>
+            <div class="salem-hq-contact-list" style="font-size: 13.5px; color: var(--slate-700); line-height: 1.8; display: flex; flex-direction: column; gap: 4px;">
+              <div class="salem-hq-contact-item"><strong>Direct:</strong> +44 20 7946 0912</div>
+              <div class="salem-hq-contact-item"><strong>Timezone:</strong> GMT / BST</div>
+              <div class="salem-hq-contact-item"><strong>Compliance:</strong> GDPR, ISO 27001, Cyber Essentials Plus</div>
+            </div>
+          </div>
+          <div class="location-img-box salem-hq-img-box">
+            <img 
+              src="assets/location_london.jpg" 
+              alt="Stackly London EMEA Headquarters" 
+              class="location-campus-img salem-hq-campus-img" 
+            />
+          </div>
+        </div>
+
+        <!-- Tab 4: Singapore APAC -->
+        <div id="loc-singapore" class="tab-pane card salem-hq-card" style="max-width: 820px; margin: 0 auto; display: none; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div class="salem-hq-content">
+            <h3 class="salem-hq-title" style="margin-bottom: 8px;">Singapore Asia-Pacific Hub</h3>
+            <p class="salem-hq-desc" style="font-size: 14px; color: var(--slate-600); margin: 8px 0 16px 0;">Directing multimodal maritime and air freight logistics integrations for APAC manufacturing networks.</p>
+            <div class="salem-hq-contact-list" style="font-size: 13.5px; color: var(--slate-700); line-height: 1.8; display: flex; flex-direction: column; gap: 4px;">
+              <div class="salem-hq-contact-item"><strong>Direct:</strong> +65 6712 8900</div>
+              <div class="salem-hq-contact-item"><strong>Timezone:</strong> SGT (UTC+8)</div>
+              <div class="salem-hq-contact-item"><strong>Compliance:</strong> MAS Guidelines, Multi-Tier Cloud Security</div>
+            </div>
+          </div>
+          <div class="location-img-box salem-hq-img-box">
+            <img 
+              src="assets/location_singapore.jpg" 
+              alt="Stackly Singapore Asia-Pacific Hub" 
+              class="location-campus-img salem-hq-campus-img" 
+            />
+          </div>
+        </div>
+
+        <!-- Tab 5: Frankfurt Cloud -->
+        <div id="loc-frankfurt" class="tab-pane card salem-hq-card" style="max-width: 820px; margin: 0 auto; display: none; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
+          <div class="salem-hq-content">
+            <h3 class="salem-hq-title" style="margin-bottom: 8px;">Frankfurt Cloud Data Region</h3>
+            <p class="salem-hq-desc" style="font-size: 14px; color: var(--slate-600); margin: 8px 0 16px 0;">Sovereign European cloud data infrastructure with isolated physical HSM cryptographic storage.</p>
+            <div class="salem-hq-contact-list" style="font-size: 13.5px; color: var(--slate-700); line-height: 1.8; display: flex; flex-direction: column; gap: 4px;">
+              <div class="salem-hq-contact-item"><strong>Direct:</strong> +49 69 9002 8110</div>
+              <div class="salem-hq-contact-item"><strong>Timezone:</strong> CET (UTC+1)</div>
+              <div class="salem-hq-contact-item"><strong>Compliance:</strong> EU Data Privacy Shield, BSI C5 Certified</div>
+            </div>
+          </div>
+          <div class="location-img-box salem-hq-img-box">
+            <img 
+              src="assets/location_frankfurt.jpg" 
+              alt="Stackly Frankfurt Sovereign Cloud Data Region" 
+              class="location-campus-img salem-hq-campus-img" 
+            />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PRE-FOOTER CALL TO ACTION -->
+    <section class="prefooter-cta-section" style="background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-950) 100%); color: var(--white); padding: 80px 0; border-top: 1px solid var(--navy-800); position: relative;">
+      <div class="container" style="text-align: center; max-width: 780px;">
+        <div class="section-tag prefooter-badge" style="background: rgba(255, 92, 1, 0.15); border-color: rgba(255, 92, 1, 0.3);">
+          <span class="material-symbols-outlined">rocket_launch</span> Immediate Deployment
+        </div>
+        <h2 class="prefooter-heading" style="color: var(--white); margin-bottom: 18px;">Ready to Transform Your Enterprise Operations?</h2>
+        <p class="prefooter-desc" style="color: var(--slate-300); font-size: 1.15rem; margin-bottom: 36px;">
+          Experience how Stackly ERP centralizes mission-critical operations with unmatched speed, security, and intelligence.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+          <a href="404.html" class="btn btn-primary btn-lg prefooter-btn-left">
+            <span>Explore Role Dashboards</span>
+          </a>
+          <a href="404.html" class="btn btn-outline-white btn-lg prefooter-btn-right">
+            <span class="material-symbols-outlined">support_agent</span>
+            <span>Contact Solution Architect</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer with Salem Hub Address -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand & Status -->
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="display: inline-block; margin-bottom: 8px;">
+            <img src="assets/stackly_066.webp" alt="Stackly ERP" style="height: 48px;" />
+          </a>
+          <p>
+            Stackly ERP is the trusted operating system for global enterprises. Integrating HRM, Finance, Supply Chain, and BI into one cohesive cloud architecture.
+          </p>
+        </div>
+
+        <!-- Col 2: Quick Links (Navbar Pages) -->
+        <div>
+          <div class="footer-heading">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="index.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Home</a></li>
+            <li><a href="about.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> About</a></li>
+            <li><a href="services.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Services</a></li>
+            <li><a href="blog.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Blog</a></li>
+            <li><a href="contact.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Contact</a></li>
+            <li><a href="login.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Platform Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Company (Routes to 404) -->
+        <div>
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> About Platform</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Enterprise Insights</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Global Locations</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Security & Roles</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Careers & Culture</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Partner Network</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Stackly Salem Address & Global Contact -->
+        <div>
+          <div class="footer-heading">Salem Hub & Global Desk</div>
+          <ul class="footer-address-list">
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">location_on</span>
+              <div>
+                <strong>Stackly ERP Towers</strong><br />
+                IT Expressway, Salem,<br />
+                Tamil Nadu 636005, India
+              </div>
+            </li>
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">phone_in_talk</span>
+              <div>
+                <span>+91 (427) 849-2910</span><br />
+                <span style="font-size: 12px; color: var(--slate-400);">Toll-Free: +1 (800) 849-2910</span>
+              </div>
+            </li>
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">mail</span>
+              <div>
+                <a href="mailto:salem.hub@stackly-erp.internal" style="color: var(--primary);">salem.hub@stackly-erp.internal</a>
+              </div>
+            </li>
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">schedule</span>
+              <div>
+                <span style="font-size: 12.5px; color: var(--slate-400);">Mon – Sat: 09:00 – 19:00 IST</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly Enterprise ERP Systems Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+          <a href="404.html" style="color: var(--slate-500); font-size: 13px;">Security Whitepaper</a>
+          <a href="404.html" style="color: var(--slate-500); font-size: 13px;">SOC-2 Compliance</a>
+          <a href="404.html" style="color: var(--slate-500); font-size: 13px;">Privacy Governance</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Tab switching controller for location cards
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabBtns = document.querySelectorAll('[data-tab-target]');
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => {
+            b.classList.remove('btn-primary', 'active');
+            b.classList.add('btn-outline');
+          });
+          btn.classList.remove('btn-outline');
+          btn.classList.add('btn-primary', 'active');
+
+          const targetId = btn.getAttribute('data-tab-target');
+          document.querySelectorAll('.tab-pane').forEach(p => {
+            p.style.display = 'none';
+            p.classList.remove('active');
+          });
+
+          const targetPane = document.getElementById(targetId);
+          if (targetPane) {
+            targetPane.style.display = 'grid';
+            targetPane.classList.add('active');
+            if (typeof ScrollTrigger !== 'undefined') {
+              ScrollTrigger.refresh();
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

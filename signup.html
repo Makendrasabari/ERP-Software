@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Enterprise Account | Stackly ERP Platform</title>
+  <meta name="description" content="Provision a new enterprise account and select your role for the Stackly ERP cloud operating system." />
+  
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at 15% 15%, rgba(255, 92, 1, 0.08) 0%, rgba(15, 23, 42, 0.03) 45%, #f1f5f9 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+
+    .auth-wrapper {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.18);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      position: relative;
+    }
+
+    /* Left Side: HD Image Panel */
+    .auth-image-side {
+      position: relative;
+      background-image: url('assets/auth_signup_bg.webp');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 44px 36px;
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .auth-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(6, 9, 17, 0.35) 0%, rgba(11, 15, 25, 0.78) 100%);
+      z-index: 1;
+    }
+
+    .auth-image-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .auth-image-card {
+      background: rgba(11, 15, 25, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Right Side: Form Container */
+    .auth-form-side {
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      background-color: var(--white);
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    #erp-signup-form {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .input-field {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      display: block;
+    }
+
+    .auth-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--slate-500);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+      background: var(--slate-100);
+      margin-bottom: 16px;
+      align-self: flex-start;
+    }
+    .auth-back-btn:hover {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* Custom Dropdown Specific Styles */
+    .custom-role-dropdown {
+      position: relative;
+      width: 100%;
+    }
+
+    .role-dropdown-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 16px;
+      background-color: var(--white);
+      border: 1px solid var(--slate-300);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--slate-800);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-align: left;
+    }
+
+    .role-dropdown-btn:hover {
+      border-color: var(--primary);
+    }
+
+    .role-dropdown-btn.active,
+    .role-dropdown-btn:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .role-dropdown-btn.input-error {
+      border-color: var(--danger) !important;
+    }
+
+    .role-dropdown-value {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .role-dropdown-value .material-symbols-outlined {
+      color: var(--primary);
+      font-size: 20px;
+    }
+
+    .role-dropdown-arrow {
+      color: var(--slate-400);
+      transition: transform var(--transition-fast);
+    }
+
+    .role-dropdown-btn.active .role-dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .role-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      width: 100%;
+      background-color: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xl);
+      z-index: 100;
+      display: none;
+      overflow: hidden;
+      animation: dropdownPop 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .role-dropdown-menu.show {
+      display: block;
+    }
+
+    @keyframes dropdownPop {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .role-dropdown-option {
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .role-dropdown-option:last-child {
+      border-bottom: none;
+    }
+
+    .role-dropdown-option:hover {
+      background-color: var(--slate-50);
+    }
+
+    .role-dropdown-option.selected {
+      background-color: var(--primary-light);
+    }
+
+    .role-dropdown-option.selected .role-option-title {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .role-option-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-md);
+      background-color: var(--slate-100);
+      color: var(--slate-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .role-dropdown-option.selected .role-option-icon {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    .role-option-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--slate-800);
+    }
+
+    .role-option-desc {
+      font-size: 11.5px;
+      color: var(--slate-500);
+      margin-top: 1px;
+    }
+
+    .placeholder-text {
+      color: var(--slate-400);
+    }
+
+    .field-error-msg {
+      font-size: 11.5px;
+      color: var(--danger);
+      margin-top: 4px;
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .form-row-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .form-row-2col > div {
+      min-width: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        padding: 16px 12px !important;
+      }
+      .auth-wrapper {
+        grid-template-columns: 1fr !important;
+        max-width: 480px !important;
+        margin: 0 auto !important;
+        border-radius: var(--radius-lg) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+      .auth-image-side {
+        display: none !important;
+      }
+      .auth-form-side {
+        padding: 28px 18px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
+      .form-row-2col {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        width: 100% !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px 10px !important;
+      }
+      .auth-form-side {
+        padding: 24px 14px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen Standalone Auth Container (No Navbar, No Footer) -->
+  <main class="auth-wrapper">
+    
+    <!-- LEFT SIDE: HD Enterprise Image & Telemetry -->
+    <div class="auth-image-side">
+      <div class="auth-image-overlay"></div>
+      
+      <div class="auth-image-content">
+        <!-- Brand Logo in Image Header -->
+        <div>
+          <a href="index.html" style="display: inline-block; margin-bottom: 24px;">
+            <img src="assets/stackly_066.webp" alt="Stackly ERP" style="height: 48px; width: auto; object-fit: contain; display: block;" />
+          </a>
+          <h3 style="color: var(--white); font-size: 1.5rem; line-height: 1.3; margin-bottom: 8px;">Automated Account Activation</h3>
+          <p style="color: var(--slate-300); font-size: 13.5px; line-height: 1.5;">
+            Provision your enterprise workspace across isolated cloud clusters with zero latency.
+          </p>
+        </div>
+
+        <!-- Telemetry Card at Bottom -->
+        <div>
+          <div class="auth-image-card">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+              <div class="status-dot"></div>
+              <div style="font-size: 13px; font-weight: 700; color: var(--white);">Automated Provisioning SLA</div>
+            </div>
+            <div style="font-size: 12.5px; color: var(--slate-300); line-height: 1.5;">
+              Zero-downtime setup. Instant credential handshake across Admin and Operations portals.
+            </div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--slate-400); margin-top: 14px;">
+            Protected by Stackly Enterprise Shield &copy; 2026.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: Signup Form -->
+    <div class="auth-form-side">
+      <a href="index.html" class="auth-back-btn" title="Return to Home">
+        <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
+        <span>Back to Home</span>
+      </a>
+
+      <div style="margin-bottom: 20px;">
+        <div class="badge badge-primary" style="margin-bottom: 6px;">
+          <span class="material-symbols-outlined">person_add</span> Account Provisioning
+        </div>
+        <h2 style="font-size: 1.75rem;">Create Enterprise Account</h2>
+        <p style="color: var(--slate-500); font-size: 13px; margin-top: 3px;">
+          Register your organizational credentials to activate role-based ERP access.
+        </p>
+      </div>
+
+      <form id="erp-signup-form" novalidate>
+        <!-- Full Name & Work Email Grid -->
+        <div class="form-row-2col">
+          <div>
+            <label for="signup-name" style="display: block; font-size: 12px; font-weight: 600; color: var(--slate-700); margin-bottom: 5px;">Executive Full Name *</label>
+            <div style="position: relative;">
+              <span class="material-symbols-outlined" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--slate-400); font-size: 18px;">person</span>
+              <input type="text" id="signup-name" class="input-field" placeholder="e.g. Alex Morgan" style="padding-left: 38px; background: var(--white); border-color: var(--slate-300); color: var(--slate-900);" required />
+            </div>
+            <div class="field-error-msg" id="name-error"><span class="material-symbols-outlined" style="font-size: 14px;">error</span> Please enter your full name</div>
+          </div>
+
+          <div>
+            <label for="signup-email" style="display: block; font-size: 12px; font-weight: 600; color: var(--slate-700); margin-bottom: 5px;">Work Email *</label>
+            <div style="position: relative;">
+              <span class="material-symbols-outlined" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--slate-400); font-size: 18px;">mail</span>
+              <input type="email" id="signup-email" class="input-field" placeholder="alex@enterprise.com" style="padding-left: 38px; background: var(--white); border-color: var(--slate-300); color: var(--slate-900);" required />
+            </div>
+            <div class="field-error-msg" id="email-error"><span class="material-symbols-outlined" style="font-size: 14px;">error</span> Valid work email is required</div>
+          </div>
+        </div>
+
+        <!-- Organization Name -->
+        <div style="margin-bottom: 14px;">
+          <label for="signup-company" style="display: block; font-size: 12px; font-weight: 600; color: var(--slate-700); margin-bottom: 5px;">Enterprise / Company Name *</label>
+          <div style="position: relative;">
+            <span class="material-symbols-outlined" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--slate-400); font-size: 18px;">business</span>
+            <input type="text" id="signup-company" class="input-field" placeholder="e.g. Global Logistics Corp" style="padding-left: 38px; background: var(--white); border-color: var(--slate-300); color: var(--slate-900);" required />
+          </div>
+          <div class="field-error-msg" id="company-error"><span class="material-symbols-outlined" style="font-size: 14px;">error</span> Company name is required</div>
+        </div>
+
+        <!-- Role Designation Dropdown (Custom Dropdown - Zero Select Tags) -->
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-size: 12px; font-weight: 600; color: var(--slate-700); margin-bottom: 5px;">Requested Role Designation *</label>
+          
+          <div class="custom-role-dropdown" id="custom-role-dropdown">
+            <button type="button" class="role-dropdown-btn" id="role-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Select Requested Role">
+              <div class="role-dropdown-value">
+                <span class="material-symbols-outlined" id="selected-role-icon">badge</span>
+                <span id="selected-role-text" class="placeholder-text">Select enterprise role...</span>
+              </div>
+              <span class="material-symbols-outlined role-dropdown-arrow">expand_more</span>
+            </button>
+
+            <div class="role-dropdown-menu" id="role-dropdown-menu" role="listbox">
+              <div class="role-dropdown-option" data-value="admin" data-icon="admin_panel_settings" role="option" tabindex="0">
+                <div class="role-option-icon">
+                  <span class="material-symbols-outlined">admin_panel_settings</span>
+                </div>
+                <div>
+                  <div class="role-option-title">Administrator</div>
+                  <div class="role-option-desc">Executive governance: HR, General Ledger, Inventory, and Reports.</div>
+                </div>
+              </div>
+
+              <div class="role-dropdown-option" data-value="operations" data-icon="precision_manufacturing" role="option" tabindex="0">
+                <div class="role-option-icon">
+                  <span class="material-symbols-outlined">precision_manufacturing</span>
+                </div>
+                <div>
+                  <div class="role-option-title">Operations Manager</div>
+                  <div class="role-option-desc">Execution oversight: Plant output, Sales orders, Procurement, and Logistics.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-error-msg" id="role-selection-error">
+            <span class="material-symbols-outlined" style="font-size: 14px;">error</span> Please select a role designation
+          </div>
+        </div>
+
+        <!-- Password & Confirm Password Grid -->
+        <div class="form-row-2col" style="margin-bottom: 16px;">
+          <div>
+            <label for="signup-password" style="display: block; font-size: 12px; font-weight: 600; color: var(--slate-700); margin-bottom: 5px;">Security Key / Password *</label>
+            <div style="position: relative;">
+              <span class="material-symbols-outlined" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--slate-400); font-size: 18px;">key</span>
+              <input type="password" id="signup-password" class="input-field" placeholder="Min. 8 characters" style="padding-left: 38px; background: var(--white); border-color: var(--slate-300); color: var(--slate-900);" required />
+            </div>
+            <div class="field-error-msg" id="password-error"><span class="material-symbols-outlined" style="font-size: 14px;">error</span> Min 8 characters required</div>
+          </div>
+
+          <div>
+            <label for="signup-confirm-password" style="display: block; font-size: 12px; font-weight: 600; color: var(--slate-700); margin-bottom: 5px;">Confirm Security Key *</label>
+            <div style="position: relative;">
+              <span class="material-symbols-outlined" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--slate-400); font-size: 18px;">lock_reset</span>
+              <input type="password" id="signup-confirm-password" class="input-field" placeholder="Re-enter password" style="padding-left: 38px; background: var(--white); border-color: var(--slate-300); color: var(--slate-900);" required />
+            </div>
+            <div class="field-error-msg" id="confirm-password-error"><span class="material-symbols-outlined" style="font-size: 14px;">error</span> Passwords do not match</div>
+          </div>
+        </div>
+
+        <!-- Compliance Checkbox -->
+        <div style="margin-bottom: 18px;">
+          <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--slate-600); cursor: pointer;">
+            <input type="checkbox" id="signup-terms" checked style="accent-color: var(--primary); margin-top: 2px;" />
+            <span>I agree to the Enterprise Master Services Agreement and SOC-2 data security policies.</span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary btn-lg" id="signup-submit-btn" style="width: 100%;">
+          <span>Create Enterprise Account</span>
+        </button>
+
+        <!-- Redirect to Login -->
+        <div style="text-align: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--slate-200); font-size: 13px; color: var(--slate-600); display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px;">
+          <span>Already have an authorized account?</span>
+          <a href="login.html" style="color: var(--primary); font-weight: 700; white-space: nowrap;">Sign In</a>
+        </div>
+      </form>
+    </div>
+
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/signup.js"></script>
+</body>
+</html>

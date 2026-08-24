@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Page Not Found | Stackly ERP Platform</title>
+  <meta name="description" content="The requested page could not be located on the Stackly Enterprise ERP network." />
+  
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background-color: var(--navy-950);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px !important;
+      position: relative;
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    .error-page-wrapper {
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      padding: 48px 36px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+      box-sizing: border-box;
+    }
+
+    .error-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.4;
+      background: rgba(255, 92, 1, 0.16);
+      border: 1px solid rgba(255, 92, 1, 0.4);
+      color: #ff7a2e;
+      margin-bottom: 16px;
+      max-width: 100%;
+      text-align: center;
+      word-break: break-word;
+      box-sizing: border-box;
+    }
+
+    .error-cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .btn-go-back {
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: var(--white);
+      cursor: pointer;
+      transition: all var(--transition-base);
+    }
+
+    .btn-go-back:hover {
+      background-color: var(--primary) !important;
+      border-color: var(--primary) !important;
+      color: var(--white) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -3px rgba(255, 92, 1, 0.45);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 16px 12px !important;
+      }
+
+      .error-page-wrapper {
+        padding: 32px 16px;
+        border-radius: var(--radius-lg);
+      }
+
+      .error-badge {
+        font-size: 11.5px;
+        padding: 5px 12px;
+        gap: 6px;
+      }
+
+      .error-badge .material-symbols-outlined {
+        font-size: 15px !important;
+      }
+
+      .error-404-number {
+        font-size: clamp(4.5rem, 18vw, 7rem) !important;
+      }
+
+      .error-cta-group .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Ambient Glow & Rotating Radar -->
+  <div class="error-404-glow" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+  <div class="error-radar-ring" style="top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; max-width: 90vw; max-height: 90vw;"></div>
+
+  <!-- Standalone 404 Main Container -->
+  <main class="error-page-wrapper">
+    <!-- Brand Logo -->
+    <div style="margin-bottom: 20px;">
+      <a href="index.html" style="display: inline-block;">
+        <img src="assets/stackly_066.webp" alt="Stackly ERP" style="height: 48px; width: auto; object-fit: contain;" />
+      </a>
+    </div>
+
+    <!-- Exception Badge -->
+    <div class="error-badge">
+      <span class="material-symbols-outlined" style="font-size: 16px; flex-shrink: 0;">explore_off</span>
+      <span>HTTP 404: Node Route Unreachable</span>
+    </div>
+
+    <!-- Animated Glowing 404 Number -->
+    <div class="error-404-number">404</div>
+
+    <h1 style="color: var(--white); font-size: clamp(1.4rem, 3.5vw, 2.2rem); margin-bottom: 14px; font-weight: 800; line-height: 1.3;">
+      Autonomous Routing Exception
+    </h1>
+
+    <p style="color: var(--slate-300); font-size: clamp(0.92rem, 1.8vw, 1.05rem); line-height: 1.65; margin-bottom: 32px; max-width: 580px; margin-left: auto; margin-right: auto;">
+      The enterprise telemetry node or page directory you requested could not be resolved in the active cluster routing table.
+    </p>
+
+    <!-- CTAs (Back to Home & Go Back) -->
+    <div class="error-cta-group">
+      <a href="index.html" class="btn btn-primary btn-lg">
+        <span class="material-symbols-outlined">home</span>
+        <span>Back to Home</span>
+      </a>
+      <button type="button" class="btn btn-go-back btn-lg" onclick="window.history.back()">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Go Back</span>
+      </button>
+    </div>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

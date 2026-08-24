@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administrator Control Center | Stackly ERP</title>
+  <meta name="description" content="Executive administration, financial ledgers, workforce management, and enterprise intelligence dashboard." />
+  
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <!-- Chart.js for High-Precision Data Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body" id="admin-dashboard-root">
+
+  <div class="dashboard-wrapper">
+    <!-- COLLAPSIBLE SIDEBAR -->
+    <aside class="sidebar" aria-label="Administrator Navigation">
+      <div class="sidebar-header">
+        <a href="admin-dashboard.html" class="sidebar-logo">
+          <img src="assets/stackly_066.webp" alt="Stackly ERP" />
+        </a>
+        <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close Navigation">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="nav-section-title">Executive Modules</div>
+        
+        <!-- Module 1: Overview -->
+        <a href="#overview" class="sidebar-nav-item active" data-module="module-overview">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="sidebar-link-text">Overview</span>
+          <span class="sidebar-badge">Live</span>
+        </a>
+
+        <!-- Module 2: Human Resources -->
+        <a href="#hr" class="sidebar-nav-item" data-module="module-hr">
+          <span class="material-symbols-outlined">badge</span>
+          <span class="sidebar-link-text">Human Resources</span>
+          <span class="sidebar-badge">1.2k</span>
+        </a>
+
+        <!-- Module 3: Finance -->
+        <a href="#finance" class="sidebar-nav-item" data-module="module-finance">
+          <span class="material-symbols-outlined">account_balance</span>
+          <span class="sidebar-link-text">Finance</span>
+        </a>
+
+        <!-- Module 4: Inventory -->
+        <a href="#inventory" class="sidebar-nav-item" data-module="module-inventory">
+          <span class="material-symbols-outlined">inventory_2</span>
+          <span class="sidebar-link-text">Inventory</span>
+          <span class="sidebar-badge" style="background: var(--danger); color: white;">4 Low</span>
+        </a>
+
+        <!-- Module 5: Reports & Analytics -->
+        <a href="#reports" class="sidebar-nav-item" data-module="module-reports">
+          <span class="material-symbols-outlined">query_stats</span>
+          <span class="sidebar-link-text">Reports & Analytics</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <a href="login.html" class="sidebar-signout-btn" title="Sign Out of Session">
+          <span class="material-symbols-outlined">logout</span>
+          <span class="sidebar-link-text">Sign Out</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEWPORT CONTENT -->
+    <div class="main-content-wrapper">
+      <!-- TOPBAR NAVIGATION -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="topbar-btn" id="mobile-sidebar-toggle" aria-label="Open Navigation Menu">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="topbar-active-title" id="topbar-page-title">
+            <span class="material-symbols-outlined" id="topbar-page-icon" style="color: var(--primary); font-size: 22px;">dashboard</span>
+            <span id="topbar-page-heading">Overview</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Notification Button (Assigned to 404 Page) -->
+          <a href="404.html" class="topbar-btn" id="topbar-notif-btn" title="System Notifications & Alerts">
+            <span class="material-symbols-outlined">notifications</span>
+            <span class="topbar-badge-dot"></span>
+          </a>
+
+          <!-- User Profile Menu -->
+          <div style="position: relative;">
+            <button class="topbar-btn" id="topbar-user-btn" style="width: auto; padding: 4px 10px; gap: 8px; border: none; background: var(--slate-100);">
+              <div id="topbar-user-avatar-initials" class="user-avatar-initials">MV</div>
+              <span id="topbar-user-name" style="font-size: 13px; font-weight: 600; color: var(--slate-800);">Marcus Vance</span>
+              <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+            </button>
+            <div class="dropdown-menu-popover" id="user-popover" style="width: 270px;">
+              <div style="padding: 16px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                  <div id="popover-user-avatar-initials" class="user-avatar-initials" style="width: 38px; height: 38px; font-size: 14px;">MV</div>
+                  <div style="overflow: hidden;">
+                    <div id="user-popover-name" style="font-weight: 700; font-size: 13.5px; color: var(--slate-900); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">Marcus Vance</div>
+                    <div id="user-popover-email" style="font-size: 11.5px; color: var(--slate-500); word-break: break-all;">admin@stackly-erp.internal</div>
+                  </div>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--slate-200);">
+                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--slate-400);">Assigned Role:</span>
+                  <span id="user-popover-role" class="badge badge-primary" style="font-size: 11px; padding: 2px 8px;">Administrator</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- DYNAMIC MODULE VIEWS -->
+      <main class="dashboard-content">
+
+        <!-- ===================================================================
+             MODULE 1: OVERVIEW
+             =================================================================== -->
+        <section id="module-overview" class="module-view active">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Executive Operations Overview</h2>
+              <div class="page-subtitle">Consolidated real-time operational telemetry across all enterprise entities.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="date-selector-pill">
+                <span class="material-symbols-outlined">calendar_today</span>
+                <span>Fiscal Year 2026 (YTD)</span>
+              </a>
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action" data-format="Executive Briefing PDF">
+                <span class="material-symbols-outlined">download</span>
+                <span>Export Briefing</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- KPI Cards Grid -->
+          <div class="kpi-grid">
+            <!-- KPI 1 -->
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Gross Operating Revenue</span>
+                <div class="kpi-icon-badge" style="background: var(--primary-light); color: var(--primary);"><span class="material-symbols-outlined">payments</span></div>
+              </div>
+              <div class="kpi-value">$24,840,200</div>
+              <div class="kpi-footer">
+                <span class="kpi-trend up"><span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span> +18.4%</span>
+                <span>vs target projection</span>
+              </div>
+            </div>
+
+            <!-- KPI 2 -->
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Total Active Headcount</span>
+                <div class="kpi-icon-badge" style="background: var(--info-bg); color: var(--info);"><span class="material-symbols-outlined">groups</span></div>
+              </div>
+              <div class="kpi-value">1,482 Staff</div>
+              <div class="kpi-footer">
+                <span class="kpi-trend up"><span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span> +42 New</span>
+                <span>in Q2 recruitment cycle</span>
+              </div>
+            </div>
+
+            <!-- KPI 3 -->
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Quarterly Net Margin</span>
+                <div class="kpi-icon-badge" style="background: var(--success-bg); color: var(--success);"><span class="material-symbols-outlined">account_balance_wallet</span></div>
+              </div>
+              <div class="kpi-value">$6,218,000</div>
+              <div class="kpi-footer">
+                <span class="kpi-trend up"><span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span> 25.03%</span>
+                <span>Operating margin</span>
+              </div>
+            </div>
+
+            <!-- KPI 4 -->
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">Global SLA Uptime</span>
+                <div class="kpi-icon-badge" style="background: var(--warning-bg); color: var(--warning);"><span class="material-symbols-outlined">speed</span></div>
+              </div>
+              <div class="kpi-value">99.985%</div>
+              <div class="kpi-footer">
+                <span class="badge badge-success"><span class="material-symbols-outlined">check_circle</span> Operational</span>
+                <span>4 clusters active</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row (Revenue Multi-Series + Regional Division Performance) -->
+          <div class="dashboard-grid-2">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <div class="chart-title">Revenue Trajectory vs Projected Targets</div>
+                  <div class="chart-subtitle">Continuous multi-currency general ledger aggregation (USD Millions)</div>
+                </div>
+                <div class="chart-pill-tabs">
+                  <button class="chart-pill-btn">7D</button>
+                  <button class="chart-pill-btn">30D</button>
+                  <button class="chart-pill-btn active">1Y</button>
+                </div>
+              </div>
+              <div class="chart-body">
+                <canvas id="adminRevenueChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div>
+                  <div class="chart-title">Regional Operating Index</div>
+                  <div class="chart-subtitle">Quarter-over-Quarter comparison</div>
+                </div>
+              </div>
+              <div class="chart-body">
+                <canvas id="adminPerformanceChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions & Recent Activities -->
+          <div class="dashboard-grid-2">
+            <!-- Activities -->
+            <div class="table-card" style="margin-bottom: 0;">
+              <div class="table-header-bar">
+                <h4>Recent System & Audit Activities</h4>
+                <span class="badge badge-neutral">Live Feed</span>
+              </div>
+              <div style="padding: 24px;">
+                <ul class="activity-feed">
+                  <li class="activity-item">
+                    <div class="activity-icon" style="background: var(--success-bg); color: var(--success);"><span class="material-symbols-outlined">payments</span></div>
+                    <div class="activity-content">
+                      <div class="activity-title">Wire Transfer Reconciled — Apex Global ($148,200)</div>
+                      <div class="activity-meta">Ledger Ref: TX-9021 • 14 mins ago by Automated Bank Gateway</div>
+                    </div>
+                  </li>
+                  <li class="activity-item">
+                    <div class="activity-icon" style="background: var(--primary-light); color: var(--primary);"><span class="material-symbols-outlined">person_add</span></div>
+                    <div class="activity-content">
+                      <div class="activity-title">New Staff Onboarded — Logistics Operations (Lead Engineer)</div>
+                      <div class="activity-meta">Employee ID: EMP-4092 • 1 hour ago by People Ops</div>
+                    </div>
+                  </li>
+                  <li class="activity-item">
+                    <div class="activity-icon" style="background: var(--warning-bg); color: var(--warning);"><span class="material-symbols-outlined">inventory</span></div>
+                    <div class="activity-content">
+                      <div class="activity-title">Automatic Stock Requisition Triggered — Hydraulic Actuators</div>
+                      <div class="activity-meta">SKU-8821-A • 2 hours ago by Inventory Rule Engine</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Quick Action Palette -->
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <h4 style="margin-bottom: 16px;">Administrative Quick Triggers</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <a href="404.html" class="btn btn-outline btn-export-action" data-format="Audited General Ledger" style="justify-content: flex-start; text-decoration: none;">
+                    <span class="material-symbols-outlined" style="color: var(--primary);">account_balance</span>
+                    <span>Generate Financial Ledger Statement</span>
+                  </a>
+                  <a href="404.html" class="btn btn-outline" style="justify-content: flex-start; text-decoration: none;">
+                    <span class="material-symbols-outlined" style="color: var(--info);">backup</span>
+                    <span>Trigger Cloud Cryptographic Backup</span>
+                  </a>
+                  <a href="404.html" class="btn btn-outline" style="justify-content: flex-start; text-decoration: none;">
+                    <span class="material-symbols-outlined" style="color: var(--success);">security_update_good</span>
+                    <span>Sync Multi-Entity Security Policies</span>
+                  </a>
+                </div>
+              </div>
+              <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--slate-100); display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: 12px; color: var(--slate-400);">Core Engine: v4.2.8 Enterprise</span>
+                <span class="badge badge-success"><span class="material-symbols-outlined">check</span> Synchronized</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: AI PREDICTIVE ANOMALY DETECTION & STRATEGIC INSIGHTS -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">psychology</span> AI Predictive Anomaly Detection & Insights Engine</h4>
+                <span class="badge badge-primary"><span class="material-symbols-outlined">auto_awesome</span> 98.6% Accuracy</span>
+              </div>
+              <div class="ai-alert-banner">
+                <span class="material-symbols-outlined">insights</span>
+                <div style="flex: 1;">
+                  <div style="font-weight: 700; color: var(--slate-900); font-size: 14px; margin-bottom: 4px;">Automated Liquidity & Ledger Optimization Opportunity</div>
+                  <div style="font-size: 13px; color: var(--slate-600); line-height: 1.5;">
+                    AI Engine detected a <strong>$42,500 cash discount opportunity</strong> by accelerating Net-30 AP settlement with AeroTech Industrial. Operating runway remains robust at 18.4 months.
+                  </div>
+                  <div style="display: flex; gap: 10px; margin-top: 12px;">
+                    <a href="404.html" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 12px; text-decoration: none;">
+                      <span class="material-symbols-outlined" style="font-size: 14px;">check</span> Execute Optimization
+                    </a>
+                    <a href="404.html" class="btn btn-outline btn-sm" style="padding: 4px 12px; font-size: 12px; text-decoration: none;">Dismiss</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: MULTI-REGION CLOUD INFRASTRUCTURE & SLA TELEMETRY -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">dns</span> Multi-Region Cloud Infrastructure & SLA Telemetry</h4>
+                <span class="badge badge-success"><span class="material-symbols-outlined">verified_user</span> SOC-2 Type II Certified</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px; color: var(--slate-900);">Salem HQ Core Node</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Tamil Nadu (IST)</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span class="badge badge-success" style="font-size: 11px;">12ms • 99.99%</span>
+                  </div>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px; color: var(--slate-900);">New York East VPC</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">US-East (EST)</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span class="badge badge-success" style="font-size: 11px;">22ms • 99.98%</span>
+                  </div>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px; color: var(--slate-900);">Frankfurt Cloud Hub</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">EU-Central (CET)</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span class="badge badge-success" style="font-size: 11px;">18ms • 100%</span>
+                  </div>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px; color: var(--slate-900);">Singapore APAC Node</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">APAC-South (SGT)</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span class="badge badge-success" style="font-size: 11px;">28ms • 99.97%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             MODULE 2: HUMAN RESOURCES
+             =================================================================== -->
+        <section id="module-hr" class="module-view">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Human Resources & Talent Analytics</h2>
+              <div class="page-subtitle">Global workforce distribution, biometric shift telemetry, and performance appraisals.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action">
+                <span class="material-symbols-outlined">download</span> Export Staff Directory
+              </a>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Total Headcount</span><div class="kpi-icon-badge" style="background: var(--info-bg); color: var(--info);"><span class="material-symbols-outlined">groups</span></div></div>
+              <div class="kpi-value">1,280</div>
+              <div class="kpi-footer"><span class="kpi-trend up">+3.4%</span><span>vs last quarter</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Active Today</span><div class="kpi-icon-badge" style="background: var(--success-bg); color: var(--success);"><span class="material-symbols-outlined">person_check</span></div></div>
+              <div class="kpi-value">1,210 Staff</div>
+              <div class="kpi-footer"><span class="badge badge-success">94.5% Attendance</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Approved Leave</span><div class="kpi-icon-badge" style="background: var(--warning-bg); color: var(--warning);"><span class="material-symbols-outlined">event_busy</span></div></div>
+              <div class="kpi-value">42 Staff</div>
+              <div class="kpi-footer"><span>Planned PTO</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Open Requisitions</span><div class="kpi-icon-badge" style="background: var(--primary-light); color: var(--primary);"><span class="material-symbols-outlined">work</span></div></div>
+              <div class="kpi-value">28 Roles</div>
+              <div class="kpi-footer"><span class="badge badge-primary">Active Recruiting</span></div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid-equal">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Department Headcount Distribution</div><div class="chart-subtitle">Workforce allocation by operational pillar</div></div>
+              </div>
+              <div class="chart-body"><canvas id="hrDeptChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Attendance & Shift Telemetry</div><div class="chart-subtitle">Weekly physical vs remote distribution</div></div>
+              </div>
+              <div class="chart-body"><canvas id="hrPerformanceChart"></canvas></div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: GLOBAL WORKFORCE REGIONAL HEADCOUNT & FACILITY ALLOCATION -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">public</span> Global Regional Workforce Allocation & Headcount</h4>
+                <span class="badge badge-neutral">4 Continents • 1,280 Total Staff</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                    <span>Salem Global HQ</span>
+                    <span>620 Staff (48.4%)</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 48.4%; background: var(--primary);"></div></div>
+                  <div style="font-size: 11.5px; color: var(--slate-500);">R&D Core & Architecture</div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                    <span>New York Executive Center</span>
+                    <span>450 Staff (35.1%)</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 35.1%; background: var(--info);"></div></div>
+                  <div style="font-size: 11.5px; color: var(--slate-500);">Americas Solutions Lab</div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                    <span>London EMEA Hub</span>
+                    <span>280 Staff (21.8%)</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 21.8%; background: var(--success);"></div></div>
+                  <div style="font-size: 11.5px; color: var(--slate-500);">Financial Node & Trade</div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600;">
+                    <span>Singapore APAC Hub</span>
+                    <span>130 Staff (10.1%)</span>
+                  </div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 10.1%; background: var(--warning);"></div></div>
+                  <div style="font-size: 11.5px; color: var(--slate-500);">Supply Chain Operations</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: EXECUTIVE LEAVE AUTHORIZATION & STRATEGIC TALENT PIPELINE -->
+          <div class="module-extra-section">
+            <div class="dashboard-grid-2">
+              <div class="enterprise-widget-card">
+                <div class="widget-header-title">
+                  <h4><span class="material-symbols-outlined">pending_actions</span> Pending Executive Leave Requests</h4>
+                  <span class="badge badge-warning">2 Action Required</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                    <div>
+                      <div style="font-weight: 700; font-size: 13px; color: var(--slate-900);">Dr. Aris Thorne (Lead AI Architect)</div>
+                      <div style="font-size: 12px; color: var(--slate-500);">Annual Conference Leave • Sep 2 - Sep 6 (5 Days)</div>
+                    </div>
+                    <div style="display: flex; gap: 6px;">
+                      <a href="404.html" class="btn btn-primary btn-sm" style="padding: 3px 8px; font-size: 11px; text-decoration: none;">Approve</a>
+                      <a href="404.html" class="btn btn-outline btn-sm" style="padding: 3px 8px; font-size: 11px; text-decoration: none;">Decline</a>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                    <div>
+                      <div style="font-weight: 700; font-size: 13px; color: var(--slate-900);">Claire Zhao (VP Global Supply)</div>
+                      <div style="font-size: 12px; color: var(--slate-500);">Executive Sabbatical • Sep 14 - Sep 20 (6 Days)</div>
+                    </div>
+                    <div style="display: flex; gap: 6px;">
+                      <a href="404.html" class="btn btn-primary btn-sm" style="padding: 3px 8px; font-size: 11px; text-decoration: none;">Approve</a>
+                      <a href="404.html" class="btn btn-outline btn-sm" style="padding: 3px 8px; font-size: 11px; text-decoration: none;">Decline</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="enterprise-widget-card">
+                <div class="widget-header-title">
+                  <h4><span class="material-symbols-outlined">person_search</span> Strategic Engineering Requisitions</h4>
+                  <span class="badge badge-primary">Q3 Priority</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--slate-50); border-radius: var(--radius-md);">
+                    <div>
+                      <div style="font-weight: 700; font-size: 13px;">Principal Distributed Ledger Architect</div>
+                      <div style="font-size: 11.5px; color: var(--slate-500);">Salem Global HQ Campus • 14 Applicants</div>
+                    </div>
+                    <span class="badge badge-success">Final Interview</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--slate-50); border-radius: var(--radius-md);">
+                    <div>
+                      <div style="font-weight: 700; font-size: 13px;">Enterprise DevOps & Cloud Security Lead</div>
+                      <div style="font-size: 11.5px; color: var(--slate-500);">New York / Remote • 28 Applicants</div>
+                    </div>
+                    <span class="badge badge-info">Screening</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             MODULE 3: FINANCE
+             =================================================================== -->
+        <section id="module-finance" class="module-view">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Finance & Real-Time General Ledger</h2>
+              <div class="page-subtitle">Continuous multi-currency ledger, operating margins, and enterprise cashflow tracking.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action" data-format="General Ledger CSV">
+                <span class="material-symbols-outlined">receipt_long</span> Download Ledger (CSV)
+              </a>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Operating Cashflow</span><div class="kpi-icon-badge" style="background: var(--success-bg); color: var(--success);"><span class="material-symbols-outlined">account_balance</span></div></div>
+              <div class="kpi-value">$18,420,000</div>
+              <div class="kpi-footer"><span class="kpi-trend up">+14.2%</span><span>Liquid treasury balance</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Accounts Receivable (AR)</span><div class="kpi-icon-badge" style="background: var(--info-bg); color: var(--info);"><span class="material-symbols-outlined">call_received</span></div></div>
+              <div class="kpi-value">$3,240,500</div>
+              <div class="kpi-footer"><span>Avg DSO: 24.1 days</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Accounts Payable (AP)</span><div class="kpi-icon-badge" style="background: var(--warning-bg); color: var(--warning);"><span class="material-symbols-outlined">call_made</span></div></div>
+              <div class="kpi-value">$1,110,800</div>
+              <div class="kpi-footer"><span>Vendor Net-30 compliant</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Gross Operating Margin</span><div class="kpi-icon-badge" style="background: var(--primary-light); color: var(--primary);"><span class="material-symbols-outlined">analytics</span></div></div>
+              <div class="kpi-value">32.4%</div>
+              <div class="kpi-footer"><span class="kpi-trend up">+4.1%</span><span>TTM Performance</span></div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid-equal">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Gross vs Net Margin Trajectory</div><div class="chart-subtitle">USD Millions (Trailing 6 Quarters)</div></div>
+              </div>
+              <div class="chart-body"><canvas id="financeCashflowChart"></canvas></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div><div class="chart-title">Revenue vs Operating Costs</div><div class="chart-subtitle">Monthly breakdown</div></div>
+              </div>
+              <div class="chart-body"><canvas id="financeIncomeExpenseChart"></canvas></div>
+            </div>
+          </div>
+
+          <!-- Financial Transactions Table -->
+          <div class="table-card">
+            <div class="table-header-bar">
+              <div>
+                <h4>Recent Audited Transactions</h4>
+                <div style="font-size: 12px; color: var(--slate-500);">Live double-entry verified ledger entries</div>
+              </div>
+              <input type="text" class="table-search-input input-field" placeholder="Filter transactions..." style="width: 220px; font-size: 12px; padding: 6px 12px; background: var(--slate-50); border-color: var(--slate-300); color: var(--slate-800);" />
+            </div>
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>Ref ID</th>
+                    <th>Client / Counterparty</th>
+                    <th>Date</th>
+                    <th>Amount (USD)</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>TX-9021</strong></td>
+                    <td>Apex Global Logistics</td>
+                    <td>2026-08-21</td>
+                    <td style="font-weight: 700; color: var(--success);">$148,200.00</td>
+                    <td>Enterprise Tier</td>
+                    <td><span class="badge badge-success"><span class="material-symbols-outlined">check_circle</span> Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>TX-9020</strong></td>
+                    <td>Vertex Dynamics Corp</td>
+                    <td>2026-08-21</td>
+                    <td style="font-weight: 700; color: var(--success);">$84,500.00</td>
+                    <td>Module Add-on</td>
+                    <td><span class="badge badge-success"><span class="material-symbols-outlined">check_circle</span> Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>TX-9019</strong></td>
+                    <td>BioMatrix Health Systems</td>
+                    <td>2026-08-20</td>
+                    <td style="font-weight: 700; color: var(--slate-900);">$232,000.00</td>
+                    <td>Annual License</td>
+                    <td><span class="badge badge-warning"><span class="material-symbols-outlined">pending</span> Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>TX-9018</strong></td>
+                    <td>Nordic Robotics AB</td>
+                    <td>2026-08-20</td>
+                    <td style="font-weight: 700; color: var(--success);">$62,400.00</td>
+                    <td>Support SLA</td>
+                    <td><span class="badge badge-success"><span class="material-symbols-outlined">check_circle</span> Completed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: MULTI-CURRENCY TREASURY LIQUIDITY & REAL-TIME FX RESERVES -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">currency_exchange</span> Multi-Currency Treasury Liquidity & Reserves</h4>
+                <span class="badge badge-success">Automated Spot Hedging Active</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; color: var(--slate-900);">US Dollar (USD)</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Primary Operating Base</div>
+                  </div>
+                  <div style="text-align: right; font-weight: 700; color: var(--success); font-size: 15px;">
+                    $12,420,000
+                  </div>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; color: var(--slate-900);">Euro (EUR)</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">1 EUR = 1.088 USD</div>
+                  </div>
+                  <div style="text-align: right; font-weight: 700; color: var(--slate-900); font-size: 15px;">
+                    €4,850,000
+                  </div>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; color: var(--slate-900);">British Pound (GBP)</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">1 GBP = 1.294 USD</div>
+                  </div>
+                  <div style="text-align: right; font-weight: 700; color: var(--slate-900); font-size: 15px;">
+                    £2,140,000
+                  </div>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; color: var(--slate-900);">Indian Rupee (INR)</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Salem Campus Ops</div>
+                  </div>
+                  <div style="text-align: right; font-weight: 700; color: var(--slate-900); font-size: 15px;">
+                    ₹142,500,000
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: STATUTORY TAX PROVISIONS & COMPLIANCE AUDIT MATRIX -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">gavel</span> Statutory Tax Provisions & Audit Governance</h4>
+                <span class="badge badge-primary">Q2 Clean Audit Opinion</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+                <div style="padding: 14px 16px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200); display: flex; flex-direction: column; gap: 8px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                    <strong style="font-size: 13.5px; color: var(--slate-900);">US Corporate Federal Tax</strong>
+                    <span class="badge badge-success" style="white-space: nowrap; flex-shrink: 0;">Filed 100%</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--slate-600); line-height: 1.4;">Provisioned: $1,280,000 • Effective Rate: 21.0%</div>
+                </div>
+                <div style="padding: 14px 16px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200); display: flex; flex-direction: column; gap: 8px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                    <strong style="font-size: 13.5px; color: var(--slate-900);">European Union VAT MOSS</strong>
+                    <span class="badge badge-success" style="white-space: nowrap; flex-shrink: 0;">Compliant</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--slate-600); line-height: 1.4;">Cross-border digital settlement reconciled.</div>
+                </div>
+                <div style="padding: 14px 16px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200); display: flex; flex-direction: column; gap: 8px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                    <strong style="font-size: 13.5px; color: var(--slate-900);">India GST 18% (Salem Hub)</strong>
+                    <span class="badge badge-success" style="white-space: nowrap; flex-shrink: 0;">E-Way Synced</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--slate-600); line-height: 1.4;">Monthly GSTR-1 and GSTR-3B filings reconciled.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             MODULE 4: INVENTORY
+             =================================================================== -->
+        <section id="module-inventory" class="module-view">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Inventory & Multi-Warehouse Stock</h2>
+              <div class="page-subtitle">Batch serialization, bay utilization, and predictive replenishment triggers.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action" data-format="Warehouse Stock Audit">
+                <span class="material-symbols-outlined">download</span> Export Stock Audit
+              </a>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Active SKUs</span><div class="kpi-icon-badge" style="background: var(--primary-light); color: var(--primary);"><span class="material-symbols-outlined">inventory_2</span></div></div>
+              <div class="kpi-value">8,450 Items</div>
+              <div class="kpi-footer"><span>Across 4 global hubs</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Warehouse Valuation</span><div class="kpi-icon-badge" style="background: var(--success-bg); color: var(--success);"><span class="material-symbols-outlined">monetization_on</span></div></div>
+              <div class="kpi-value">$14,280,000</div>
+              <div class="kpi-footer"><span>FIFO cost valuation</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Turnover Velocity</span><div class="kpi-icon-badge" style="background: var(--info-bg); color: var(--info);"><span class="material-symbols-outlined">autorenew</span></div></div>
+              <div class="kpi-value">6.4x / Year</div>
+              <div class="kpi-footer"><span class="kpi-trend up">+0.8x</span><span>vs industry avg</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header"><span class="kpi-title">Low Stock Reorders</span><div class="kpi-icon-badge" style="background: var(--danger-bg); color: var(--danger);"><span class="material-symbols-outlined">warning</span></div></div>
+              <div class="kpi-value">4 Critical</div>
+              <div class="kpi-footer"><span class="badge badge-danger">Action Required</span></div>
+            </div>
+          </div>
+
+          <div class="chart-card" style="margin-bottom: 28px;">
+            <div class="chart-card-header">
+              <div><div class="chart-title">Global Warehouse Capacity & Storage Utilization</div><div class="chart-subtitle">Physical volume utilization across primary regional hubs</div></div>
+            </div>
+            <div class="chart-body"><canvas id="inventoryCapacityChart"></canvas></div>
+          </div>
+
+          <!-- Low Stock Products Table -->
+          <div class="table-card">
+            <div class="table-header-bar">
+              <div>
+                <h4>Low-Stock Reorder Triggers</h4>
+                <div style="font-size: 12px; color: var(--slate-500);">Critical threshold alerts requiring replenishment authorization</div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="erp-table">
+                <thead>
+                  <tr>
+                    <th>SKU Code</th>
+                    <th>Product / Material</th>
+                    <th>Warehouse Hub</th>
+                    <th>Available Stock</th>
+                    <th>Safety Minimum</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>SKU-8821-A</strong></td>
+                    <td>Hydraulic Actuator Cylinders</td>
+                    <td>Warehouse East (NJ)</td>
+                    <td style="font-weight: 700; color: var(--danger);">14 Units</td>
+                    <td>50 Units</td>
+                    <td><span class="badge badge-danger"><span class="material-symbols-outlined">error</span> Critical</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>SKU-5412-B</strong></td>
+                    <td>Titanium Fastener Packs (M8)</td>
+                    <td>Hub Central (TX)</td>
+                    <td style="font-weight: 700; color: var(--warning);">38 Packs</td>
+                    <td>100 Packs</td>
+                    <td><span class="badge badge-warning"><span class="material-symbols-outlined">warning</span> Warning</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>SKU-3199-C</strong></td>
+                    <td>Optic Fiber Transceivers 100G</td>
+                    <td>Warehouse West (CA)</td>
+                    <td style="font-weight: 700; color: var(--danger);">8 Units</td>
+                    <td>40 Units</td>
+                    <td><span class="badge badge-danger"><span class="material-symbols-outlined">error</span> Critical</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: AUTOMATED REPLENISHMENT ENGINE & SUPPLIER LEAD TIMES -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">auto_mode</span> Automated Replenishment Engine & Multi-Tier Lead Times</h4>
+                <span class="badge badge-primary">Autonomous Policy v3.2</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                <div style="padding: 12px 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">AeroTech High-Pressure Actuators</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 4px 0;">Auto-PO Threshold: &lt; 50 units (Lead Time: 4.2 Days)</div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 28%; background: var(--danger);"></div></div>
+                  <span class="badge badge-danger" style="font-size: 11px;">Restock Triggered</span>
+                </div>
+                <div style="padding: 12px 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">MicroSemi ARM Controllers</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 4px 0;">Auto-PO Threshold: &lt; 40 units (Lead Time: 2.1 Days)</div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 65%; background: var(--warning);"></div></div>
+                  <span class="badge badge-warning" style="font-size: 11px;">Buffer Adequate</span>
+                </div>
+                <div style="padding: 12px 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="font-weight: 700; font-size: 13.5px;">BASF High-Temp Polymer Resins</div>
+                  <div style="font-size: 12px; color: var(--slate-600); margin: 4px 0;">Auto-PO Threshold: &lt; 100 kg (Lead Time: 1.8 Days)</div>
+                  <div class="progress-track"><div class="progress-bar-fill" style="width: 92%; background: var(--success);"></div></div>
+                  <span class="badge badge-success" style="font-size: 11px;">Optimal Stock</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: GLOBAL WAREHOUSE HUB CAPACITIES & SKU VELOCITY -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">warehouse</span> Regional Warehouse Facilities & SKU Turnover Velocity</h4>
+                <span class="badge badge-neutral">4 Hubs Synchronized</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Salem Tech Hub Central</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">3,420 Active SKUs • 88% Vol</div>
+                  </div>
+                  <span class="badge badge-success">Velocity: 8.2x</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Rotterdam Maritime Terminal</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">2,180 Active SKUs • 74% Vol</div>
+                  </div>
+                  <span class="badge badge-success">Velocity: 6.9x</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Chicago Logistics Hub</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">1,850 Active SKUs • 82% Vol</div>
+                  </div>
+                  <span class="badge badge-success">Velocity: 7.1x</span>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13.5px;">Singapore FreePort</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">1,000 Active SKUs • 61% Vol</div>
+                  </div>
+                  <span class="badge badge-success">Velocity: 5.4x</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             MODULE 5: REPORTS & ANALYTICS
+             =================================================================== -->
+        <section id="module-reports" class="module-view">
+          <div class="page-header-row">
+            <div class="page-title">
+              <h2>Executive Reports & Predictive Forecasting</h2>
+              <div class="page-subtitle">Multi-year growth regressions, compliance reporting, and automated scheduled analytics.</div>
+            </div>
+            <div class="header-action-group">
+              <a href="404.html" class="btn btn-primary btn-sm btn-export-action" data-format="Full Executive BI Packet">
+                <span class="material-symbols-outlined">file_present</span> Export Complete BI Packet
+              </a>
+            </div>
+          </div>
+
+          <div class="chart-card" style="margin-bottom: 28px;">
+            <div class="chart-card-header">
+              <div>
+                <div class="chart-title">AI-Augmented 5-Year Enterprise Valuation Forecast</div>
+                <div class="chart-subtitle">Regression model trained on historical ledger events and market indices</div>
+              </div>
+              <span class="badge badge-primary" style="white-space: nowrap; flex-shrink: 0;">Model Confidence: 96.8%</span>
+            </div>
+            <div class="chart-body"><canvas id="reportsForecastChart"></canvas></div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div class="card">
+              <h4>Regulatory Tax Export (IFRS)</h4>
+              <p style="font-size: 13px; color: var(--slate-500); margin: 6px 0 0 0;">Automated multi-jurisdictional tax schedules ready for filing.</p>
+            </div>
+
+            <div class="card">
+              <h4>Workforce Productivity Matrix</h4>
+              <p style="font-size: 13px; color: var(--slate-500); margin: 6px 0 0 0;">Department appraisal scores and utilization rates.</p>
+            </div>
+
+            <div class="card">
+              <h4>Supply Chain Resiliency Audit</h4>
+              <p style="font-size: 13px; color: var(--slate-500); margin: 6px 0 0 0;">Vendor lead times, SLA benchmarks, and route variances.</p>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 1: SCHEDULED EXECUTIVE BI DISTRIBUTION & AUTOMATED CRON -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">schedule_send</span> Automated Executive BI Delivery & Scheduled Pipeline</h4>
+                <span class="badge badge-success">3 Standing Schedules Active</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13px;">Daily Flash Financial Snapshot</div>
+                    <div style="font-size: 11.5px; color: var(--slate-500);">Every Day @ 06:00 UTC • 12 Board Members</div>
+                  </div>
+                  <a href="404.html" class="btn btn-outline btn-sm" style="font-size: 11px; padding: 4px 8px; text-decoration: none;">Run Now</a>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13px;">Weekly Plant OEE & QA Benchmarks</div>
+                    <div style="font-size: 11.5px; color: var(--slate-500);">Every Monday @ 08:00 UTC • Ops Leads</div>
+                  </div>
+                  <a href="404.html" class="btn btn-outline btn-sm" style="font-size: 11px; padding: 4px 8px; text-decoration: none;">Run Now</a>
+                </div>
+                <div class="node-telemetry-item">
+                  <div>
+                    <div style="font-weight: 700; font-size: 13px;">Monthly Statutory Tax Provision</div>
+                    <div style="font-size: 11.5px; color: var(--slate-500);">1st of Month @ 00:00 UTC • Finance Ops</div>
+                  </div>
+                  <a href="404.html" class="btn btn-outline btn-sm" style="font-size: 11px; padding: 4px 8px; text-decoration: none;">Run Now</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXTRA SECTION 2: MULTI-SCENARIO AI STRESS TEST & GROWTH SIMULATIONS -->
+          <div class="module-extra-section">
+            <div class="enterprise-widget-card">
+              <div class="widget-header-title">
+                <h4><span class="material-symbols-outlined">analytics</span> Multi-Scenario Monte Carlo Stress Test & Growth Simulations</h4>
+                <span class="badge badge-primary">10,000 Iterations</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;">
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong style="font-size: 13.5px; color: var(--success);">Base Case Scenario</strong>
+                    <span class="badge badge-success">+18.4%</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--slate-600); line-height: 1.5;">Forecast Revenue: $29.4M • Margin: 25.8% (Confidence: 84%)</div>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong style="font-size: 13.5px; color: var(--primary);">Bull Case (Accelerated Cloud)</strong>
+                    <span class="badge badge-primary">+26.2%</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--slate-600); line-height: 1.5;">Forecast Revenue: $34.1M • Margin: 29.2% (Confidence: 68%)</div>
+                </div>
+                <div style="padding: 14px; background: var(--slate-50); border-radius: var(--radius-md); border: 1px solid var(--slate-200);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <strong style="font-size: 13.5px; color: var(--warning);">Conservative Stress Case</strong>
+                    <span class="badge badge-warning">+11.8%</span>
+                  </div>
+                  <div style="font-size: 12px; color: var(--slate-600); line-height: 1.5;">Forecast Revenue: $24.8M • Margin: 21.4% (Confidence: 94%)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

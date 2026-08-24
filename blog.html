@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise Insights & ERP Engineering Blog | Stackly ERP</title>
+  <meta name="description" content="Read expert research, whitepapers, and operational blueprints on AI-driven ERP, autonomous supply chains, and enterprise digital transformation." />
+  
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!-- Site Header & Sticky Navbar -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo" id="nav-brand-logo">
+        <img src="assets/stackly_066.webp" alt="Stackly ERP Enterprise Logo" />
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="header-actions">
+        <a href="login.html" class="btn btn-primary">
+          <span class="material-symbols-outlined">lock_open</span> Login
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle Mobile Menu">
+          <span class="material-symbols-outlined" style="font-size: 26px;">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-backdrop"></div>
+  <aside class="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <img src="assets/stackly_066.webp" alt="Stackly ERP" style="height: 44px;" />
+      <button class="mobile-drawer-close" style="background: none; border: none; cursor: pointer; color: var(--slate-600);">
+        <span class="material-symbols-outlined" style="font-size: 24px;">close</span>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="blog.html" class="nav-link active">Blog</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="mobile-drawer-footer">
+      <a href="login.html" class="btn btn-primary" style="width: 100%;">
+        <span class="material-symbols-outlined">lock_open</span> Login
+      </a>
+    </div>
+  </aside>
+
+  <main>
+    <!-- PAGE HERO WITH HD BACKGROUND IMAGE -->
+    <section class="page-hero-banner" style="background-image: url('assets/bg_blog.webp');">
+      <div class="container">
+        <div class="hero-banner-content" style="margin-bottom: 48px;">
+          <div class="section-tag hero-anim-badge" style="background: rgba(255, 92, 1, 0.2); border-color: rgba(255, 92, 1, 0.45); color: #ff7a2e; margin-bottom: 16px;">
+            <span class="material-symbols-outlined">menu_book</span> Enterprise Insights
+          </div>
+          <h1>
+            <span class="hero-heading-left">Operational Engineering &amp;</span>
+            <span class="hero-heading-right" style="color: var(--primary);">ERP Research</span>
+          </h1>
+          <p class="section-subtitle hero-anim-desc">
+            Field-tested insights, architectural blueprints, and digital transformation guides written by enterprise practitioners.
+          </p>
+        </div>
+
+        <!-- FEATURED LEAD ARTICLE CARD -->
+        <div class="card blog-featured-hero-card">
+          <div class="blog-featured-content">
+            <div class="featured-tag" style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+              <span class="badge badge-primary">Featured Article</span>
+              <span class="badge badge-neutral"><span class="material-symbols-outlined">schedule</span> 6 min read</span>
+            </div>
+            
+            <!-- Bold letters: Animate from Left -->
+            <h2 class="featured-heading-from-left" style="font-size: 1.75rem; margin-bottom: 16px; line-height: 1.25;">
+              How AI-Augmented ERP Systems Cut Operational Bottlenecks by 42%
+            </h2>
+            
+            <!-- Downside small letters: Animate from Right -->
+            <div class="featured-desc-from-right">
+              <p style="color: var(--slate-600); font-size: 14.5px; line-height: 1.6; margin-bottom: 24px;">
+                Discover how machine learning neural pipelines integrated into core ERP ledgers automate predictive inventory reordering and eliminate costly fulfillment lag across distributed multi-warehouse networks.
+              </p>
+              <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--slate-100); padding-top: 20px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <img src="assets/avatar_admin.webp" alt="Marcus Vance" style="width: 42px; height: 42px; border-radius: 50%;" />
+                  <div>
+                    <div style="font-weight: 700; color: var(--slate-900);">Marcus Vance</div>
+                    <div style="font-size: 12px; color: var(--slate-500);">Chief Enterprise Architect</div>
+                  </div>
+                </div>
+                <span style="font-size: 13px; color: var(--slate-400);">Aug 18, 2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real Image: Animate from Up to Down -->
+          <div class="blog-featured-image-col" style="background-color: var(--navy-900); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <img src="assets/blog_ai_featured.jpg" alt="AI ERP Transformation" class="featured-img-from-top" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG ARTICLES GRID -->
+    <section class="section-padding blog-grid-animation-section" style="background-color: var(--slate-50);">
+      <div class="container">
+        <div id="blog-cards-grid">
+          
+          <!-- Article 1: Left Card - Enters SECOND -->
+          <div class="card blog-article-card blog-card-left" data-category="AI & Automation" data-title="How AI-Augmented ERP Systems Cut Operational Bottlenecks by 42%">
+            <div class="blog-card-img-wrap">
+              <img src="assets/blog_real_aierp.jpg" alt="How AI-Augmented ERP Systems Cut Operational Bottlenecks by 42%" />
+            </div>
+            <div class="blog-card-meta">
+              <span class="badge badge-primary">AI & Automation</span>
+              <span class="badge badge-neutral"><span class="material-symbols-outlined">schedule</span> 6 min read</span>
+            </div>
+            <h4>How AI-Augmented ERP Systems Cut Operational Bottlenecks by 42%</h4>
+            <p>
+              Discover how machine learning neural pipelines integrated into core ERP ledgers automate predictive inventory reordering and eliminate costly fulfillment lag.
+            </p>
+            <div class="blog-card-author">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="assets/avatar_admin.webp" alt="Marcus Vance" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover;" />
+                <span style="font-size: 13.5px; font-weight: 600; color: var(--slate-800);">Marcus Vance</span>
+              </div>
+              <span style="font-size: 12.5px; color: var(--slate-400);">Aug 18, 2026</span>
+            </div>
+          </div>
+
+          <!-- Article 2: Center Card - Enters FIRST -->
+          <div class="card blog-article-card blog-card-center" data-category="Supply Chain" data-title="Autonomous Supply Chain Architecture: Mitigating Global Disruption">
+            <div class="blog-card-img-wrap">
+              <img src="assets/blog_real_supplychain.jpg" alt="Autonomous Supply Chain Architecture: Mitigating Global Disruption" />
+            </div>
+            <div class="blog-card-meta">
+              <span class="badge badge-success">Supply Chain</span>
+              <span class="badge badge-neutral"><span class="material-symbols-outlined">schedule</span> 8 min read</span>
+            </div>
+            <h4>Autonomous Supply Chain Architecture: Mitigating Global Disruption</h4>
+            <p>
+              Real-time multi-modal logistics telemetry enables proactive route diversion, dynamic supplier scorecards, and resilient inventory buffers.
+            </p>
+            <div class="blog-card-author">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="assets/avatar_ops.webp" alt="Elena Rostova" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover;" />
+                <span style="font-size: 13.5px; font-weight: 600; color: var(--slate-800);">Elena Rostova</span>
+              </div>
+              <span style="font-size: 12.5px; color: var(--slate-400);">Aug 14, 2026</span>
+            </div>
+          </div>
+
+          <!-- Article 3: Right Card - Enters THIRD -->
+          <div class="card blog-article-card blog-card-right" data-category="Finance & Tax" data-title="Next-Gen Financial Intelligence: Cloud Ledgers and Continuous Auditing">
+            <div class="blog-card-img-wrap">
+              <img src="assets/blog_real_finance.jpg" alt="Next-Gen Financial Intelligence: Cloud Ledgers and Continuous Auditing" />
+            </div>
+            <div class="blog-card-meta">
+              <span class="badge badge-warning">Finance & Tax</span>
+              <span class="badge badge-neutral"><span class="material-symbols-outlined">schedule</span> 5 min read</span>
+            </div>
+            <h4>Next-Gen Financial Intelligence: Cloud Ledgers and Continuous Auditing</h4>
+            <p>
+              Transforming month-end close from weeks into minutes with automated bank reconciliations, multi-currency compliance, and AI variance analysis.
+            </p>
+            <div class="blog-card-author">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 34px; height: 34px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">DC</div>
+                <span style="font-size: 13.5px; font-weight: 600; color: var(--slate-800);">David Chen, CFA</span>
+              </div>
+              <span style="font-size: 12.5px; color: var(--slate-400);">Aug 09, 2026</span>
+            </div>
+          </div>
+
+          <!-- Article 4: Subsequent Card -->
+          <div class="card blog-article-card blog-card-subsequent" data-category="Human Resources" data-title="Modern Workforce Optimization in High-Growth Tech Enterprises">
+            <div class="blog-card-img-wrap">
+              <img src="assets/blog_hr_workforce.jpg" alt="Modern Workforce Optimization in High-Growth Tech Enterprises" />
+            </div>
+            <div class="blog-card-meta">
+              <span class="badge badge-info">Human Resources</span>
+              <span class="badge badge-neutral"><span class="material-symbols-outlined">schedule</span> 4 min read</span>
+            </div>
+            <h4>Modern Workforce Optimization in High-Growth Tech Enterprises</h4>
+            <p>
+              Data-driven talent retention frameworks, real-time productivity benchmarking, and automated global payroll compliance at enterprise scale.
+            </p>
+            <div class="blog-card-author">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 34px; height: 34px; border-radius: 50%; background: rgba(59, 130, 246, 0.1); color: var(--info); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">SJ</div>
+                <span style="font-size: 13.5px; font-weight: 600; color: var(--slate-800);">Sarah Jenkins</span>
+              </div>
+              <span style="font-size: 12.5px; color: var(--slate-400);">Aug 02, 2026</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: RESEARCH TRACKS & TOPIC RADAR (SHUFFLE & ARRANGE ANIMATION) -->
+    <section class="section-padding horizontal-cards-section" style="background-color: var(--white); border-top: 1px solid var(--slate-200);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag"><span class="material-symbols-outlined">hub</span> Research Radar</div>
+          <h2 class="section-title row-heading-left">Core Enterprise Research Tracks</h2>
+          <p class="section-subtitle row-subtitle-right">Explore in-depth architectural taxonomy and engineering benchmarks across mission-critical ERP domains.</p>
+        </div>
+
+        <div class="horizontal-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 24px;">
+          
+          <!-- Track Card 1 -->
+          <div class="card shuffle-card" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: 28px 24px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div class="icon-box" style="margin-bottom: 0; background: var(--primary-light); color: var(--primary);">
+                  <span class="material-symbols-outlined">account_balance</span>
+                </div>
+                <span class="badge badge-primary">Finance &amp; Audit</span>
+              </div>
+              <h4 style="margin-bottom: 10px; font-size: 1.15rem;">Autonomous Ledgers</h4>
+              <p style="font-size: 13.5px; color: var(--slate-600); line-height: 1.6; margin-bottom: 20px;">
+                Deterministic GAAP reconciliation engines, automated double-entry verification, and sub-second multi-entity ledger consolidation.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--slate-100); padding-top: 14px; display: flex; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--slate-500);">
+              <span>12 Research Papers</span>
+              <span style="color: var(--primary); font-weight: 600;">Updated Weekly</span>
+            </div>
+          </div>
+
+          <!-- Track Card 2 -->
+          <div class="card shuffle-card" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: 28px 24px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div class="icon-box" style="margin-bottom: 0; background: var(--success-bg); color: var(--success);">
+                  <span class="material-symbols-outlined">local_shipping</span>
+                </div>
+                <span class="badge badge-success">Logistics &amp; Ops</span>
+              </div>
+              <h4 style="margin-bottom: 10px; font-size: 1.15rem;">Supply Chain Telemetry</h4>
+              <p style="font-size: 13.5px; color: var(--slate-600); line-height: 1.6; margin-bottom: 20px;">
+                Neural predictive replenishment models, multi-modal maritime IoT tracking, and vendor SLA risk scoring algorithms.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--slate-100); padding-top: 14px; display: flex; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--slate-500);">
+              <span>18 Field Reports</span>
+              <span style="color: var(--success); font-weight: 600;">Updated Bi-Weekly</span>
+            </div>
+          </div>
+
+          <!-- Track Card 3 -->
+          <div class="card shuffle-card" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: 28px 24px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div class="icon-box" style="margin-bottom: 0; background: var(--info-bg); color: var(--info);">
+                  <span class="material-symbols-outlined">dns</span>
+                </div>
+                <span class="badge badge-info">Cloud Architecture</span>
+              </div>
+              <h4 style="margin-bottom: 10px; font-size: 1.15rem;">Distributed Systems</h4>
+              <p style="font-size: 13.5px; color: var(--slate-600); line-height: 1.6; margin-bottom: 20px;">
+                Active-active multi-region Kubernetes clusters, event-driven streaming pipelines, and 99.999% uptime operational blueprints.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--slate-100); padding-top: 14px; display: flex; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--slate-500);">
+              <span>9 Technical Specs</span>
+              <span style="color: var(--info); font-weight: 600;">Tier-IV Verified</span>
+            </div>
+          </div>
+
+          <!-- Track Card 4 -->
+          <div class="card shuffle-card" style="display: flex; flex-direction: column; justify-content: space-between; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); padding: 28px 24px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <div class="icon-box" style="margin-bottom: 0; background: var(--warning-bg); color: var(--warning);">
+                  <span class="material-symbols-outlined">verified_user</span>
+                </div>
+                <span class="badge badge-warning">Security &amp; Trust</span>
+              </div>
+              <h4 style="margin-bottom: 10px; font-size: 1.15rem;">Sovereign Governance</h4>
+              <p style="font-size: 13.5px; color: var(--slate-600); line-height: 1.6; margin-bottom: 20px;">
+                Hardware Security Modules (HSM), FIPS 140-3 cryptography, and automated GDPR, HIPAA &amp; SOC-2 compliance frameworks.
+              </p>
+            </div>
+            <div style="border-top: 1px solid var(--slate-100); padding-top: 14px; display: flex; align-items: center; justify-content: space-between; font-size: 12.5px; color: var(--slate-500);">
+              <span>15 Compliance Guides</span>
+              <span style="color: var(--warning); font-weight: 600;">FedRAMP Ready</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: EXECUTIVE WHITEPAPERS & BENCHMARKS (SHUFFLE & ARRANGE ANIMATION) -->
+    <section class="section-padding horizontal-cards-section" style="background-color: var(--navy-950); color: var(--white); border-top: 1px solid var(--navy-800);">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag" style="background: rgba(255, 92, 1, 0.15); border-color: rgba(255, 92, 1, 0.3);">
+            <span class="material-symbols-outlined">download</span> Downloadable Blueprints
+          </div>
+          <h2 class="section-title row-heading-left" style="color: var(--white);">Executive Whitepapers &amp; Technical Guides</h2>
+          <p class="section-subtitle row-subtitle-right" style="color: var(--slate-400);">Comprehensive frameworks, migration blueprints, and ROI calculations authored by our chief enterprise architects.</p>
+        </div>
+
+        <div class="horizontal-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 24px;">
+          
+          <!-- Whitepaper Card 1 -->
+          <div class="card shuffle-card" style="background-color: var(--navy-900); border: 1px solid var(--navy-800); border-radius: var(--radius-xl); padding: 32px 26px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="badge badge-primary" style="align-self: flex-start; margin-bottom: 16px;">Technical Guide • 42 Pages</div>
+              <h4 style="color: var(--white); margin-bottom: 12px; font-size: 1.2rem; line-height: 1.35;">2026 Enterprise ERP Migration Blueprint</h4>
+              <p style="font-size: 13.5px; color: var(--slate-300); line-height: 1.6; margin-bottom: 24px;">
+                Proven step-by-step methodologies for zero-downtime database cutovers from legacy monolithic ERPs to distributed cloud clusters.
+              </p>
+            </div>
+            <a href="404.html" class="btn btn-outline-white btn-sm" style="width: 100%; justify-content: center;">
+              <span class="material-symbols-outlined">download</span>
+              <span>Download Blueprint (PDF)</span>
+            </a>
+          </div>
+
+          <!-- Whitepaper Card 2 -->
+          <div class="card shuffle-card" style="background-color: var(--navy-900); border: 1px solid var(--navy-800); border-radius: var(--radius-xl); padding: 32px 26px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="badge badge-success" style="align-self: flex-start; margin-bottom: 16px;">Architecture Paper • 28 Pages</div>
+              <h4 style="color: var(--white); margin-bottom: 12px; font-size: 1.2rem; line-height: 1.35;">Autonomous Cloud Ledger Architecture</h4>
+              <p style="font-size: 13.5px; color: var(--slate-300); line-height: 1.6; margin-bottom: 24px;">
+                Mathematical proofs and latency benchmarks comparing distributed ledger consensus models against legacy relational databases.
+              </p>
+            </div>
+            <a href="404.html" class="btn btn-outline-white btn-sm" style="width: 100%; justify-content: center;">
+              <span class="material-symbols-outlined">download</span>
+              <span>Download Whitepaper (PDF)</span>
+            </a>
+          </div>
+
+          <!-- Whitepaper Card 3 -->
+          <div class="card shuffle-card" style="background-color: var(--navy-900); border: 1px solid var(--navy-800); border-radius: var(--radius-xl); padding: 32px 26px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="badge badge-warning" style="align-self: flex-start; margin-bottom: 16px;">Industry Report • 36 Pages</div>
+              <h4 style="color: var(--white); margin-bottom: 12px; font-size: 1.2rem; line-height: 1.35;">Global Supply Chain Resiliency Index</h4>
+              <p style="font-size: 13.5px; color: var(--slate-300); line-height: 1.6; margin-bottom: 24px;">
+                Empirical field analysis of multi-modal fulfillment bottlenecks and mitigation benchmarks across 500+ multinational enterprises.
+              </p>
+            </div>
+            <a href="404.html" class="btn btn-outline-white btn-sm" style="width: 100%; justify-content: center;">
+              <span class="material-symbols-outlined">download</span>
+              <span>Download Report (PDF)</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: EXECUTIVE NEWSLETTER & ADVISORY SUBSCRIPTION BAR -->
+    <section class="section-padding" style="background-color: var(--slate-50); border-top: 1px solid var(--slate-200);">
+      <div class="container" style="max-width: 960px;">
+        <div class="newsletter-enterprise-box reveal-init">
+          <div style="max-width: 680px; margin: 0 auto; text-align: center;">
+            <div class="section-tag" style="background: rgba(255, 92, 1, 0.15); border-color: rgba(255, 92, 1, 0.3); color: #ff7a2e; margin-bottom: 16px;">
+              <span class="material-symbols-outlined">mail</span> Executive Intelligence
+            </div>
+            <h2 style="color: var(--white); margin-bottom: 14px;">Subscribe to the Enterprise Architecture Dispatch</h2>
+            <p style="color: var(--slate-300); font-size: 14.5px; line-height: 1.6; margin-bottom: 28px;">
+              Curated weekly briefings on distributed database resilience, algorithmic supply chain optimization, and global financial compliance. No marketing spam.
+            </p>
+
+            <form id="executive-newsletter-form" action="404.html" method="GET" style="display: flex; flex-direction: column; gap: 20px;">
+              <div class="newsletter-input-group">
+                <input type="email" placeholder="Enter your corporate email" required class="input-field" />
+                <button type="submit" class="btn btn-primary">
+                  <span>Join 18,000+ Architects</span>
+                </button>
+              </div>
+
+              <!-- Topic Preferences -->
+              <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 13px; color: var(--slate-400);">
+                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                  <input type="checkbox" checked style="accent-color: var(--primary);" /> Autonomous AI Ledgers
+                </label>
+                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                  <input type="checkbox" checked style="accent-color: var(--primary);" /> Supply Chain Telemetry
+                </label>
+                <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                  <input type="checkbox" checked style="accent-color: var(--primary);" /> Regulatory & Tax Updates
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRE-FOOTER CALL TO ACTION -->
+    <section class="prefooter-cta-section" style="background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-950) 100%); color: var(--white); padding: 80px 0; border-top: 1px solid var(--navy-800); position: relative;">
+      <div class="container" style="text-align: center; max-width: 780px;">
+        <div class="section-tag prefooter-badge" style="background: rgba(255, 92, 1, 0.15); border-color: rgba(255, 92, 1, 0.3);">
+          <span class="material-symbols-outlined">rocket_launch</span> Immediate Deployment
+        </div>
+        <h2 class="prefooter-heading" style="color: var(--white); margin-bottom: 18px;">Ready to Transform Your Enterprise Operations?</h2>
+        <p class="prefooter-desc" style="color: var(--slate-300); font-size: 1.15rem; margin-bottom: 36px;">
+          Experience how Stackly ERP centralizes mission-critical operations with unmatched speed, security, and intelligence.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+          <a href="404.html" class="btn btn-primary btn-lg prefooter-btn-left">
+            <span>Explore Role Dashboards</span>
+          </a>
+          <a href="404.html" class="btn btn-outline-white btn-lg prefooter-btn-right">
+            <span class="material-symbols-outlined">support_agent</span>
+            <span>Contact Solution Architect</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer with Salem Hub Address -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Col 1: Brand & Status -->
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" style="display: inline-block; margin-bottom: 8px;">
+            <img src="assets/stackly_066.webp" alt="Stackly ERP" style="height: 48px;" />
+          </a>
+          <p>
+            Stackly ERP is the trusted operating system for global enterprises. Integrating HRM, Finance, Supply Chain, and BI into one cohesive cloud architecture.
+          </p>
+        </div>
+
+        <!-- Col 2: Quick Links (Navbar Pages) -->
+        <div>
+          <div class="footer-heading">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="index.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Home</a></li>
+            <li><a href="about.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> About</a></li>
+            <li><a href="services.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Services</a></li>
+            <li><a href="blog.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Blog</a></li>
+            <li><a href="contact.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Contact</a></li>
+            <li><a href="login.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Platform Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Company (Routes to 404) -->
+        <div>
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> About Platform</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Enterprise Insights</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Global Locations</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Security & Roles</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Careers & Culture</a></li>
+            <li><a href="404.html"><span class="material-symbols-outlined" style="font-size: 14px;">chevron_right</span> Partner Network</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Stackly Salem Address & Global Contact -->
+        <div>
+          <div class="footer-heading">Salem Hub & Global Desk</div>
+          <ul class="footer-address-list">
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">location_on</span>
+              <div>
+                <strong>Stackly ERP Towers</strong><br />
+                IT Expressway, Salem,<br />
+                Tamil Nadu 636005, India
+              </div>
+            </li>
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">phone_in_talk</span>
+              <div>
+                <span>+91 (427) 849-2910</span><br />
+                <span style="font-size: 12px; color: var(--slate-400);">Toll-Free: +1 (800) 849-2910</span>
+              </div>
+            </li>
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">mail</span>
+              <div>
+                <a href="mailto:salem.hub@stackly-erp.internal" style="color: var(--primary);">salem.hub@stackly-erp.internal</a>
+              </div>
+            </li>
+            <li class="footer-address-item">
+              <span class="material-symbols-outlined">schedule</span>
+              <div>
+                <span style="font-size: 12.5px; color: var(--slate-400);">Mon – Sat: 09:00 – 19:00 IST</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <div>&copy; 2026 Stackly Enterprise ERP Systems Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+          <a href="404.html" style="color: var(--slate-500); font-size: 13px;">Security Whitepaper</a>
+          <a href="404.html" style="color: var(--slate-500); font-size: 13px;">SOC-2 Compliance</a>
+          <a href="404.html" style="color: var(--slate-500); font-size: 13px;">Privacy Governance</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
