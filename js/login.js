@@ -101,6 +101,7 @@ function initLoginForm() {
   const form = document.getElementById('erp-login-form');
   const roleError = document.getElementById('role-selection-error');
   const emailError = document.getElementById('email-validation-error');
+  const passError = document.getElementById('password-validation-error');
   const emailInput = document.getElementById('login-email');
   const passInput = document.getElementById('login-password');
   const dropdownTrigger = document.getElementById('role-dropdown-trigger');
@@ -114,10 +115,24 @@ function initLoginForm() {
       const val = emailInput.value.trim();
       if (val.length > 0 && val.includes('@') && !isGmail(val)) {
         emailInput.style.borderColor = 'var(--danger)';
-        if (emailError) emailError.style.display = 'flex';
-      } else {
+        if (emailError) {
+          const span = emailError.querySelector('span:last-child');
+          if (span) span.textContent = 'Email must be in @gmail format (e.g. yourname@gmail.com).';
+          emailError.style.display = 'flex';
+        }
+      } else if (val.length > 0) {
         emailInput.style.borderColor = 'var(--slate-300)';
         if (emailError) emailError.style.display = 'none';
+      }
+    });
+  }
+
+  // Real-time password input feedback
+  if (passInput) {
+    passInput.addEventListener('input', () => {
+      if (passInput.value.trim()) {
+        passInput.style.borderColor = 'var(--slate-300)';
+        if (passError) passError.style.display = 'none';
       }
     });
   }
@@ -130,21 +145,35 @@ function initLoginForm() {
 
     // Check Email Provided
     if (!email) {
+      if (emailInput) {
+        emailInput.style.borderColor = 'var(--danger)';
+        emailInput.focus();
+      }
+      if (emailError) {
+        const span = emailError.querySelector('span:last-child');
+        if (span) span.textContent = 'Please enter your email address.';
+        emailError.style.display = 'flex';
+      }
       if (typeof window.showToast === 'function') {
         window.showToast('warning', 'Email Required', 'Please enter your email address.');
       }
-      if (emailInput) emailInput.focus();
       return;
     }
 
     // Check @gmail format requirement
     if (!isGmail(email)) {
-      if (emailInput) emailInput.style.borderColor = 'var(--danger)';
-      if (emailError) emailError.style.display = 'flex';
+      if (emailInput) {
+        emailInput.style.borderColor = 'var(--danger)';
+        emailInput.focus();
+      }
+      if (emailError) {
+        const span = emailError.querySelector('span:last-child');
+        if (span) span.textContent = 'Email must be in @gmail format (e.g. yourname@gmail.com).';
+        emailError.style.display = 'flex';
+      }
       if (typeof window.showToast === 'function') {
         window.showToast('warning', 'Gmail Format Required', 'Email must be in @gmail format (e.g. name@gmail.com).');
       }
-      if (emailInput) emailInput.focus();
       return;
     } else {
       if (emailInput) emailInput.style.borderColor = 'var(--slate-300)';
@@ -153,11 +182,18 @@ function initLoginForm() {
 
     // Check Password Provided
     if (!password) {
+      if (passInput) {
+        passInput.style.borderColor = 'var(--danger)';
+        passInput.focus();
+      }
+      if (passError) passError.style.display = 'flex';
       if (typeof window.showToast === 'function') {
         window.showToast('warning', 'Password Required', 'Please enter your password.');
       }
-      if (passInput) passInput.focus();
       return;
+    } else {
+      if (passInput) passInput.style.borderColor = 'var(--slate-300)';
+      if (passError) passError.style.display = 'none';
     }
 
     // Check Role Selection

@@ -1278,6 +1278,166 @@ img {
 }
 
 /* ==========================================================================
+   MISSION / VISION / PHILOSOPHY: VERTICAL-STACK TO HORIZONTAL-ROW ANIMATION
+   ========================================================================== */
+.mission-vision-section {
+  position: relative;
+  overflow: visible;
+}
+
+.mission-vision-grid {
+  position: relative;
+}
+
+/* 1. Our Mission Card (Starts at Center Top -> glides Left into Column 1) */
+.mission-vision-section .mission-card {
+  opacity: 0;
+  transform: translate3d(calc(100% + 32px), -36px, 0) scale(0.96);
+  will-change: transform, opacity;
+  position: relative;
+  z-index: 3;
+}
+
+.mission-vision-section.revealed .mission-card {
+  animation: missionStackToRow 2.6s cubic-bezier(0.2, 0.95, 0.3, 1) forwards;
+}
+
+@keyframes missionStackToRow {
+  0% {
+    opacity: 0;
+    transform: translate3d(calc(100% + 32px), -36px, 0) scale(0.96);
+  }
+  16% {
+    opacity: 1;
+    transform: translate3d(calc(100% + 32px), 0, 0) scale(1);
+  }
+  56% {
+    opacity: 1;
+    transform: translate3d(calc(100% + 32px), 0, 0) scale(1);
+  }
+  86% {
+    opacity: 1;
+    transform: translate3d(-6px, 0, 0) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* 2. Our Vision Card (Enters Center Middle below Mission -> glides Up to Center Column 2) */
+.mission-vision-section .vision-card {
+  opacity: 0;
+  transform: translate3d(0, calc(100% + 64px), 0) scale(0.96);
+  will-change: transform, opacity;
+  position: relative;
+  z-index: 2;
+}
+
+.mission-vision-section.revealed .vision-card {
+  animation: visionStackToRow 2.6s cubic-bezier(0.2, 0.95, 0.3, 1) forwards;
+}
+
+@keyframes visionStackToRow {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, calc(100% + 64px), 0) scale(0.96);
+  }
+  16% {
+    opacity: 0;
+    transform: translate3d(0, calc(100% + 64px), 0) scale(0.96);
+  }
+  34% {
+    opacity: 1;
+    transform: translate3d(0, calc(100% + 32px), 0) scale(1);
+  }
+  56% {
+    opacity: 1;
+    transform: translate3d(0, calc(100% + 32px), 0) scale(1);
+  }
+  86% {
+    opacity: 1;
+    transform: translate3d(0, -6px, 0) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* 3. Business Philosophy Card (Enters Center Bottom below Vision -> glides Right & Up into Column 3) */
+.mission-vision-section .philosophy-card {
+  opacity: 0;
+  transform: translate3d(calc(-100% - 32px), calc(200% + 96px), 0) scale(0.96);
+  will-change: transform, opacity;
+  position: relative;
+  z-index: 1;
+}
+
+.mission-vision-section.revealed .philosophy-card {
+  animation: philosophyStackToRow 2.6s cubic-bezier(0.2, 0.95, 0.3, 1) forwards;
+}
+
+@keyframes philosophyStackToRow {
+  0% {
+    opacity: 0;
+    transform: translate3d(calc(-100% - 32px), calc(200% + 96px), 0) scale(0.96);
+  }
+  34% {
+    opacity: 0;
+    transform: translate3d(calc(-100% - 32px), calc(200% + 96px), 0) scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(calc(-100% - 32px), calc(200% + 64px), 0) scale(1);
+  }
+  56% {
+    opacity: 1;
+    transform: translate3d(calc(-100% - 32px), calc(200% + 64px), 0) scale(1);
+  }
+  86% {
+    opacity: 1;
+    transform: translate3d(6px, 0, 0) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.mission-vision-section.revealed .mission-card:hover,
+.mission-vision-section.revealed .vision-card:hover,
+.mission-vision-section.revealed .philosophy-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+}
+
+@media (max-width: 900px) {
+  @keyframes missionStackToRow {
+    0% { opacity: 0; transform: translate3d(0, 30px, 0); }
+    100% { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes visionStackToRow {
+    0% { opacity: 0; transform: translate3d(0, 30px, 0); }
+    100% { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes philosophyStackToRow {
+    0% { opacity: 0; transform: translate3d(0, 30px, 0); }
+    100% { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mission-vision-section .mission-card,
+  .mission-vision-section .vision-card,
+  .mission-vision-section .philosophy-card {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
    EXECUTIVE LEADERSHIP CONTINUOUS HORIZONTAL SLIDER
    ========================================================================== */
 .leadership-slider-container {
@@ -2420,45 +2580,75 @@ img {
 /* 1. Top Badge / Label: Smooth fade + subtle downward movement */
 .hero-anim-badge {
   opacity: 0;
-  animation: heroFadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  transform: translate3d(0, -22px, 0);
   will-change: transform, opacity;
+}
+
+.hero-section.revealed .hero-anim-badge,
+.page-hero-banner.revealed .hero-anim-badge {
+  animation: heroFadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
 }
 
 /* 2. White Heading Text: Slides smoothly from Left */
 .hero-heading-left {
   display: inline-block;
   opacity: 0;
-  animation: heroSlideInLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
+  transform: translate3d(-50px, 0, 0);
   will-change: transform, opacity;
+}
+
+.hero-section.revealed .hero-heading-left,
+.page-hero-banner.revealed .hero-heading-left {
+  animation: heroSlideInLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
 }
 
 /* 3. Orange Highlighted Heading Text: Slides smoothly from Right */
 .hero-heading-right {
   display: inline-block;
   opacity: 0;
-  animation: heroSlideInRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+  transform: translate3d(50px, 0, 0);
   will-change: transform, opacity;
+}
+
+.hero-section.revealed .hero-heading-right,
+.page-hero-banner.revealed .hero-heading-right {
+  animation: heroSlideInRight 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
 }
 
 /* 4. Description Paragraph: Smooth upward fade from Below */
 .hero-anim-desc {
   opacity: 0;
-  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  transform: translate3d(0, 30px, 0);
   will-change: transform, opacity;
+}
+
+.hero-section.revealed .hero-anim-desc,
+.page-hero-banner.revealed .hero-anim-desc {
+  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.40s forwards;
 }
 
 /* 5. Left CTA Button: Slides in from Left */
 .hero-cta-left {
   opacity: 0;
-  animation: heroCtaLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
+  transform: translate3d(-40px, 0, 0);
   will-change: transform, opacity;
+}
+
+.hero-section.revealed .hero-cta-left,
+.page-hero-banner.revealed .hero-cta-left {
+  animation: heroCtaLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
 }
 
 /* 6. Right CTA Button: Slides in from Right */
 .hero-cta-right {
   opacity: 0;
-  animation: heroCtaRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;
+  transform: translate3d(40px, 0, 0);
   will-change: transform, opacity;
+}
+
+.hero-section.revealed .hero-cta-right,
+.page-hero-banner.revealed .hero-cta-right {
+  animation: heroCtaRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
 }
 
 /* Preserve hover interactions for CTA buttons */
@@ -2470,8 +2660,13 @@ img {
 /* 7. Trust Badges / Footnotes: Subtle upward entrance */
 .hero-anim-trust {
   opacity: 0;
-  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  transform: translate3d(0, 20px, 0);
   will-change: transform, opacity;
+}
+
+.hero-section.revealed .hero-anim-trust,
+.page-hero-banner.revealed .hero-anim-trust {
+  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.78s forwards;
 }
 
 @media (max-width: 768px) {

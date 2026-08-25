@@ -82,32 +82,54 @@ function initSignupForm() {
 
   if (!form) return;
 
+  const nameInput = document.getElementById('signup-name');
+  const emailInput = document.getElementById('signup-email');
+  const companyInput = document.getElementById('signup-company');
+  const passInput = document.getElementById('signup-password');
+  const confirmPassInput = document.getElementById('signup-confirm-password');
+
+  const nameError = document.getElementById('name-error');
+  const emailError = document.getElementById('email-error');
+  const companyError = document.getElementById('company-error');
+  const roleError = document.getElementById('role-selection-error');
+  const passError = document.getElementById('password-error');
+  const confirmPassError = document.getElementById('confirm-password-error');
+  const triggerBtn = document.getElementById('role-dropdown-trigger');
+
+  // Attach live input feedback
+  [
+    { input: nameInput, err: nameError },
+    { input: emailInput, err: emailError },
+    { input: companyInput, err: companyError },
+    { input: passInput, err: passError },
+    { input: confirmPassInput, err: confirmPassError }
+  ].forEach(item => {
+    if (item.input) {
+      item.input.addEventListener('input', () => {
+        if (item.input.value.trim()) {
+          item.input.style.borderColor = 'var(--slate-300)';
+          if (item.err) item.err.style.display = 'none';
+        }
+      });
+    }
+  });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    const nameInput = document.getElementById('signup-name');
-    const emailInput = document.getElementById('signup-email');
-    const companyInput = document.getElementById('signup-company');
-    const passInput = document.getElementById('signup-password');
-    const confirmPassInput = document.getElementById('signup-confirm-password');
-
-    const nameError = document.getElementById('name-error');
-    const emailError = document.getElementById('email-error');
-    const companyError = document.getElementById('company-error');
-    const roleError = document.getElementById('role-selection-error');
-    const passError = document.getElementById('password-error');
-    const confirmPassError = document.getElementById('confirm-password-error');
-    const triggerBtn = document.getElementById('role-dropdown-trigger');
 
     // Reset error states
     [nameError, emailError, companyError, roleError, passError, confirmPassError].forEach(el => {
       if (el) el.style.display = 'none';
+    });
+    [nameInput, emailInput, companyInput, passInput, confirmPassInput].forEach(inp => {
+      if (inp) inp.style.borderColor = 'var(--slate-300)';
     });
 
     let isValid = true;
 
     // Validate Name
     if (!nameInput.value.trim()) {
+      nameInput.style.borderColor = 'var(--danger)';
       if (nameError) nameError.style.display = 'flex';
       isValid = false;
     }
@@ -115,12 +137,14 @@ function initSignupForm() {
     // Validate Email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
+      emailInput.style.borderColor = 'var(--danger)';
       if (emailError) emailError.style.display = 'flex';
       isValid = false;
     }
 
     // Validate Company
     if (!companyInput.value.trim()) {
+      companyInput.style.borderColor = 'var(--danger)';
       if (companyError) companyError.style.display = 'flex';
       isValid = false;
     }
@@ -134,12 +158,14 @@ function initSignupForm() {
 
     // Validate Password
     if (!passInput.value || passInput.value.length < 8) {
+      passInput.style.borderColor = 'var(--danger)';
       if (passError) passError.style.display = 'flex';
       isValid = false;
     }
 
     // Validate Confirm Password
-    if (passInput.value !== confirmPassInput.value) {
+    if (!confirmPassInput.value || passInput.value !== confirmPassInput.value) {
+      confirmPassInput.style.borderColor = 'var(--danger)';
       if (confirmPassError) confirmPassError.style.display = 'flex';
       isValid = false;
     }
