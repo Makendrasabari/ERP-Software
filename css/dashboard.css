@@ -3,13 +3,14 @@
    ThemeForest-Grade Enterprise Admin & Operations Styling
    ========================================================================== */
 
-.dashboard-body {
+body.dashboard-body {
   background-color: #f4f6f9;
   color: var(--slate-700);
   font-family: var(--font-body);
   display: flex;
   min-height: 100vh;
   overflow-x: hidden;
+  padding-top: 0 !important;
 }
 
 /* Dashboard Shell Layout */
@@ -1355,4 +1356,122 @@ body.mobile-sidebar-open {
   font-size: 24px;
   flex-shrink: 0;
   margin-top: 2px;
+}
+
+/* ==========================================================================
+   DASHBOARD WELCOME BANNER (ADMIN & OPS)
+   ========================================================================== */
+.dashboard-welcome-banner {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+  border: 1px solid var(--slate-200);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 26px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-welcome-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 240px;
+  height: 100%;
+  background: radial-gradient(circle at right center, rgba(255, 92, 1, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.welcome-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 280px;
+}
+
+.welcome-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.welcome-avatar-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--white);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-status-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+}
+
+.welcome-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--slate-900);
+  margin-bottom: 4px;
+}
+
+.welcome-desc {
+  font-size: 13.5px;
+  color: var(--slate-600);
+  line-height: 1.5;
+}
+
+.welcome-banner-badges {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.welcome-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  color: var(--slate-700);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.welcome-badge-pill .material-symbols-outlined {
+  font-size: 16px;
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .dashboard-welcome-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 16px;
+    gap: 14px;
+  }
+  .welcome-banner-left {
+    width: 100%;
+  }
+  .welcome-banner-badges {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }

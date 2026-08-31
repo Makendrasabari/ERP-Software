@@ -68,6 +68,12 @@ function initUserProfile() {
     popoverRole.textContent = dynamicRole;
     popoverRole.className = dynamicRole === 'Administrator' ? 'badge badge-primary' : 'badge badge-success';
   }
+
+  // Update Overview Welcome Note Heading
+  const welcomeHeadings = document.querySelectorAll('.welcome-heading');
+  welcomeHeadings.forEach(heading => {
+    heading.textContent = `Welcome back, ${finalName}`;
+  });
 }
 
 function parseUserIdentifier(raw) {
@@ -77,37 +83,71 @@ function parseUserIdentifier(raw) {
     text = text.split('@')[0].trim();
   }
 
-  // Handle dot, underscore, dash separated (e.g. mahendra.sabari, mahendra_sabari, mahendra-sabari)
-  if (/[\._\-]/.test(text)) {
-    let parts = text.split(/[\._\-]+/).filter(Boolean);
-    let name = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
-    let initials = parts.map(p => p.charAt(0).toUpperCase()).slice(0, 2).join('');
-    return { name, initials };
+  // Strip trailing numbers (e.g. mahendrasabari02 -> mahendrasabari, ramesh01 -> ramesh)
+  const noTrailingDigits = text.replace(/\d+$/, '');
+  if (noTrailingDigits.length > 0) {
+    text = noTrailingDigits;
   }
 
-  // Handle space separated (e.g. "Mahendra Sabari")
+  // Handle dot, underscore, dash, plus separated (e.g. mahendra.sabari, ramesh_gopal)
+  if (/[\._\-\+]/.test(text)) {
+    let parts = text.split(/[\._\-\+]+/).filter(Boolean);
+    parts = parts.map(p => p.replace(/\d+/g, '')).filter(Boolean);
+    if (parts.length > 0) {
+      let name = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+      let initials = parts.map(p => p.charAt(0).toUpperCase()).slice(0, 2).join('');
+      return { name, initials };
+    }
+  }
+
+  // Handle space separated (e.g. "Mahendra Sabari", "Ramesh Gopal")
   if (/\s+/.test(text)) {
     let parts = text.split(/\s+/).filter(Boolean);
-    let name = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
-    let initials = parts.map(p => p.charAt(0).toUpperCase()).slice(0, 2).join('');
-    return { name, initials };
+    parts = parts.map(p => p.replace(/\d+/g, '')).filter(Boolean);
+    if (parts.length > 0) {
+      let name = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+      let initials = parts.map(p => p.charAt(0).toUpperCase()).slice(0, 2).join('');
+      return { name, initials };
+    }
   }
 
-  // Handle camelCase (e.g. mahendraSabari)
-  let words = text.replace(/([a-z])([A-Z])/g, '$1 $2').split(' ');
+  // Handle camelCase (e.g. RameshGopal, mahendraSabari)
+  let words = text.replace(/([a-z])([A-Z])/g, '$1 $2').split(' ').filter(Boolean);
   if (words.length > 1) {
-    let name = words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
-    let initials = (words[0].charAt(0) + words[1].charAt(0)).toUpperCase();
-    return { name, initials };
+    let parts = words.map(w => w.replace(/\d+/g, '')).filter(Boolean);
+    if (parts.length > 0) {
+      let name = parts.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+      let initials = (parts[0].charAt(0) + (parts[1] ? parts[1].charAt(0) : '')).toUpperCase();
+      return { name, initials };
+    }
   }
 
-  // Single word like 'mahendrasabari'
+  // Compound name detection for unseparated names (e.g. mahendrasabari, rameshgopal, sureshkumar)
   let lower = text.toLowerCase();
-  if (lower.startsWith('mahendra') && lower.length > 8) {
-    let part1 = 'Mahendra';
-    let part2 = lower.slice(8);
-    part2 = part2.charAt(0).toUpperCase() + part2.slice(1);
-    return { name: `${part1} ${part2}`, initials: `M${part2.charAt(0)}` };
+  const commonFirstNames = [
+    'mahendra', 'ramesh', 'suresh', 'rajesh', 'dinesh', 'ganesh', 'naresh',
+    'vijay', 'ajay', 'sanjay', 'anil', 'sunil', 'rahul', 'rohit', 'amit', 'arun',
+    'marcus', 'elena', 'john', 'david', 'michael', 'robert', 'james', 'alex', 'mohammed'
+  ];
+  for (const fn of commonFirstNames) {
+    if (lower.startsWith(fn) && lower.length > fn.length) {
+      let p1 = fn.charAt(0).toUpperCase() + fn.slice(1);
+      let p2 = lower.slice(fn.length);
+      p2 = p2.charAt(0).toUpperCase() + p2.slice(1);
+      return { name: p1 + ' ' + p2, initials: (p1.charAt(0) + p2.charAt(0)).toUpperCase() };
+    }
+  }
+
+  const commonLastNames = [
+    'sabari', 'gopal', 'kumar', 'sharma', 'patel', 'singh', 'vance', 'rostova', 'reddy', 'rao'
+  ];
+  for (const ln of commonLastNames) {
+    if (lower.endsWith(ln) && lower.length > ln.length) {
+      let p1 = lower.slice(0, lower.length - ln.length);
+      p1 = p1.charAt(0).toUpperCase() + p1.slice(1);
+      let p2 = ln.charAt(0).toUpperCase() + ln.slice(1);
+      return { name: p1 + ' ' + p2, initials: (p1.charAt(0) + p2.charAt(0)).toUpperCase() };
+    }
   }
 
   let name = text.charAt(0).toUpperCase() + text.slice(1);

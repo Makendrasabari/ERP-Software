@@ -666,7 +666,7 @@ img {
               border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
 
 /* Stagger entrance delays following natural grid order (Row 1: Left -> Center -> Right, Row 2...) */
@@ -698,10 +698,10 @@ img {
   pointer-events: none;
 }
 
-/* Keep card content fully readable and positioned above background overlay */
-.modules-grid-3d .module-card-3d > * {
+/* Keep card content fully readable and positioned above background carousel */
+.modules-grid-3d .module-card-3d > *:not(.card-hover-carousel) {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Hover Interaction: Subtle lift (-7px), gentle scale (1.018), soft orange ambient glow */
@@ -727,6 +727,13 @@ img {
   transform: scale(1.06) rotate(-3deg);
 }
 
+.modules-grid-3d .module-card-3d:hover .btn-outline {
+  background: var(--white);
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 4px 12px rgba(255, 92, 1, 0.14);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .modules-grid-3d .module-card-3d {
     opacity: 1 !important;
@@ -734,6 +741,118 @@ img {
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   MODULE CARD RELATED-IMAGES HOVER CAROUSEL (BACKGROUND LAYER)
+   Smoothly displays 3 related WebP images behind the card content on hover,
+   overlaying the existing card area without pushing content down or creating gaps.
+   ========================================================================== */
+.modules-grid-3d .module-card-3d .card-hover-carousel {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  border-radius: inherit !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modules-grid-3d.revealed .module-card-3d:hover .card-hover-carousel,
+.modules-grid-3d .module-card-3d:focus-within .card-hover-carousel,
+.modules-grid-3d .module-card-3d.is-hovered .card-hover-carousel {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Slides Track */
+.card-hover-carousel .carousel-track {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Individual Slides */
+.card-hover-carousel .carousel-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.04);
+}
+
+.card-hover-carousel .carousel-slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.card-hover-carousel .carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Readability Scrim: increased image visibility while keeping overlay effect & crisp text */
+.card-hover-carousel .carousel-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0.40) 50%, rgba(255, 255, 255, 0.60) 100%);
+  pointer-events: none;
+}
+
+/* Slide Indicator Dots (top right corner of card) */
+.card-hover-carousel .carousel-indicators {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  pointer-events: auto;
+}
+
+.card-hover-carousel .carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.card-hover-carousel .carousel-dot:hover {
+  background: var(--white);
+  transform: scale(1.2);
+}
+
+.card-hover-carousel .carousel-dot.active {
+  width: 15px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+}
+
 
 /* ==========================================================================
    PREMIUM SCROLL-TRIGGERED CONTENT + VISUAL ENTRANCE ANIMATION SYSTEM
@@ -2055,12 +2174,35 @@ img {
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 520px;
+  min-height: 590px;
   transform-style: preserve-3d;
   transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   border-radius: var(--radius-xl);
   outline: none;
+}
+
+.deployment-card-img-wrap {
+  width: 100%;
+  height: 140px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 14px;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  background: var(--navy-900);
+}
+
+.deployment-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.deployment-flip-wrapper:hover .deployment-card-img {
+  transform: scale(1.05);
 }
 
 /* Hover or Touch/Active flipped state */
@@ -2307,8 +2449,48 @@ img {
 .footer-brand p {
   font-size: 14px;
   line-height: 1.7;
-  margin: 16px 0 24px 0;
+  margin: 16px 0 20px 0;
   color: var(--slate-400);
+}
+
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.footer-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--slate-400);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.footer-social-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  transition: transform var(--transition-fast);
+}
+
+.footer-social-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(255, 92, 1, 0.35);
+}
+
+.footer-social-btn:hover svg {
+  transform: scale(1.1);
 }
 
 .footer-heading {
@@ -3100,6 +3282,11 @@ img {
     text-align: center;
     max-width: 460px;
     margin: 14px auto 0 auto;
+  }
+
+  .footer-social-links {
+    justify-content: center;
+    margin: 16px auto 0 auto;
   }
 
   .footer-heading {
@@ -4430,10 +4617,23 @@ img {
 @media (max-width: 768px) {
   .salem-hq-card {
     grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 20px 16px !important;
   }
-  .salem-hq-img-box {
-    height: 200px;
+  .salem-hq-img-box,
+  .location-img-box {
+    width: 100% !important;
+    height: 220px !important;
     margin-top: 12px;
+    border-radius: var(--radius-md) !important;
+    overflow: hidden !important;
+  }
+  .salem-hq-campus-img,
+  .location-campus-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
   }
 
   .contact-consultation-grid,

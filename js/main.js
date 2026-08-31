@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWhitepaperDownloads();
   initExecutiveNewsletter();
   initDeploymentFlipCards();
+  initModuleCardHoverCarousels();
   initLeadershipSlider();
   initTestimonialsMarquee();
   initGSAPAnimations();
@@ -664,6 +665,97 @@ function initDeploymentFlipCards() {
     // Reset flipped state on mouseleave
     wrapper.addEventListener('mouseleave', () => {
       card.classList.remove('flipped');
+    });
+  });
+}
+
+/* ==========================================================================
+   SERVICES MODULE CARDS RELATED-IMAGES HOVER CAROUSEL CONTROLLER
+   Rotates background slides smoothly on hover without shifting or resizing card.
+   ========================================================================== */
+function initModuleCardHoverCarousels() {
+  const moduleCards = document.querySelectorAll('.modules-grid-3d .module-card-3d');
+  if (!moduleCards.length) return;
+
+  moduleCards.forEach(card => {
+    const carousel = card.querySelector('.card-hover-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+
+    if (!slides.length) return;
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let timer = null;
+
+    function goToSlide(index) {
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+
+      currentIndex = (index + totalSlides) % totalSlides;
+      slides[currentIndex].classList.add('active');
+
+      if (dots[currentIndex]) {
+        dots[currentIndex].classList.add('active');
+      }
+    }
+
+    function startAutoSlide() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => {
+        goToSlide(currentIndex + 1);
+      }, 2000);
+    }
+
+    function stopAutoSlide() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    // Hover listeners on the module card
+    card.addEventListener('mouseenter', () => {
+      card.classList.add('is-hovered');
+      startAutoSlide();
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('is-hovered');
+      stopAutoSlide();
+      // Return to first slide cleanly when cursor departs
+      setTimeout(() => {
+        if (!card.classList.contains('is-hovered')) {
+          goToSlide(0);
+        }
+      }, 350);
+    });
+
+    // Dot indicators
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const targetIdx = parseInt(dot.getAttribute('data-slide-index'), 10);
+        goToSlide(targetIdx);
+        startAutoSlide();
+      });
+    });
+
+    // Keyboard accessibility inside card
+    card.addEventListener('focusin', () => {
+      card.classList.add('is-hovered');
+      startAutoSlide();
+    });
+
+    card.addEventListener('focusout', (e) => {
+      if (!card.contains(e.relatedTarget)) {
+        card.classList.remove('is-hovered');
+        stopAutoSlide();
+        goToSlide(0);
+      }
     });
   });
 }
